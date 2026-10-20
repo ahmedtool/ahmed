@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ميزان المحاسبي</title>
+<meta name="description" content="ميزان — نظام محاسبي عربي متكامل بالقيد المزدوج يضم أكثر من ٢٠٠ عملية محاسبية">
+<meta name="theme-color" content="#0f2622">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--FONTS--><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;700&display=swap" media="print" onload="this.media='all'"><!--/FONTS-->
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<!--APP-->
+<div id="login" class="login" hidden>
+  <form class="login-card" id="loginForm" autocomplete="off" novalidate>
+    <div class="brand-mark" aria-hidden="true"><i data-i="scale"></i></div>
+    <h1 class="wordmark">ميزان</h1>
+    <p class="login-sub">نظام المحاسبة المتكامل بالقيد المزدوج</p>
+    <div id="loginCard" class="login-field">
+      <label class="field"><span>كلمة المرور</span><input id="loginPass" type="password" inputmode="numeric" autocomplete="current-password" placeholder="••••"></label>
+      <p class="login-err" id="loginErr" role="alert" hidden></p>
+    </div>
+    <button class="btn pri block" type="submit">دخول</button>
+    <p class="login-hint" id="loginHint">كلمة المرور المؤقتة: <b dir="ltr">1234</b> — غيّرها من الإعدادات بعد الدخول.</p>
+  </form>
+  <p class="login-foot">قيود مزدوجة · فواتير ومخزون · رواتب وأصول · قوائم مالية · أكثر من ٢٠٠ عملية محاسبية</p>
+</div>
+
+<div id="app" class="app" hidden>
+  <aside class="side" id="side">
+    <div class="side-brand"><span class="brand-ic"><i data-i="scale"></i></span><div><b>ميزان</b><small id="sideCompany"></small></div></div>
+    <nav class="nav" id="nav" aria-label="القائمة الرئيسية"></nav>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="main-wrap">
+    <header class="top">
+      <button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="القائمة"><i data-i="menu"></i></button>
+      <button type="button" class="search-trigger" id="searchBtn"><i data-i="search"></i><span>ابحث عن عملية أو صفحة…</span><kbd dir="ltr">Ctrl K</kbd></button>
+      <div class="top-actions">
+        <button type="button" class="icon-btn" id="themeBtn" title="تبديل المظهر" aria-label="تبديل المظهر"><i data-i="moon"></i></button>
+        <button type="button" class="icon-btn" id="logoutBtn" title="تسجيل الخروج" aria-label="تسجيل الخروج"><i data-i="logout"></i></button>
+      </div>
+    </header>
+    <div id="demoBar" class="demo-bar" hidden><span>تعرض الشاشات <b>بيانات تجريبية</b> لمؤسسة افتراضية لتوضيح عمل النظام.</span><button type="button" class="btn sm" id="demoClear">ابدأ بنظام فارغ</button></div>
+    <main id="main" class="main"></main>
+  </div>
+</div>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <header class="modal-head"><h3 id="modalTitle"></h3><button type="button" class="icon-btn" data-close aria-label="إغلاق"><i data-i="x"></i></button></header>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+<div id="confirm" class="modal confirm" hidden>
+  <div class="modal-card sm" role="alertdialog" aria-modal="true" aria-labelledby="confirmMsg">
+    <p id="confirmMsg"></p>
+    <div class="form-actions"><button type="button" id="confirmOk" class="btn danger">تأكيد</button><button type="button" id="confirmCancel" class="btn ghost">إلغاء</button></div>
+  </div>
+</div>
+<div id="palette" class="palette" hidden>
+  <div class="palette-card" role="dialog" aria-label="البحث في العمليات">
+    <label class="pal-search"><i data-i="search"></i><input id="palInput" type="search" placeholder="ابحث في الصفحات والعمليات…" autocomplete="off"></label>
+    <div id="palList" class="pal-list"></div>
+    <div class="pal-foot"><span id="palCount"></span><span><kbd>↑</kbd><kbd>↓</kbd> للتنقل · <kbd>Enter</kbd> للتنفيذ · <kbd>Esc</kbd> للإغلاق</span></div>
+  </div>
+</div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<!--/APP-->
+<script src="assets/js/core.js" defer></script>
+<script src="assets/js/ops.js" defer></script>
+<script src="assets/js/pages.js" defer></script>
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
