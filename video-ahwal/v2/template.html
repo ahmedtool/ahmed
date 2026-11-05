@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>الأحوال الشخصية v2</title>
+<style>
+@font-face{font-family:Cairo;src:url(fonts/cairo-700.ttf);font-weight:700}
+@font-face{font-family:Cairo;src:url(fonts/cairo-900.ttf);font-weight:900}
+@font-face{font-family:Kufi;src:url(fonts/reemkufi-700.ttf);font-weight:700}
+:root{--bg:#cfe2ec;--grid:#9fbfd0;--ink:#1c1c1a;--sand:#e9c27a;--sand2:#f3d9a4;--paper:#f6efdc;--red:#c9523b;--teal:#2c6e72;--hl:#f5c94a;--blue:#3e7ca3}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+body{font-family:Cairo,sans-serif;color:var(--ink)}
+#stage{position:absolute;inset:0;overflow:hidden}
+#cam{position:absolute;inset:0}
+#grid{position:absolute;inset:-120px;background-color:var(--bg);background-image:
+ linear-gradient(var(--grid) 2px,transparent 2px),linear-gradient(90deg,var(--grid) 2px,transparent 2px),
+ linear-gradient(rgba(159,191,208,.45) 1px,transparent 1px),linear-gradient(90deg,rgba(159,191,208,.45) 1px,transparent 1px);
+ background-size:120px 120px,120px 120px,30px 30px,30px 30px}
+#grain{position:absolute;inset:0;background:url(grain.png);mix-blend-mode:multiply;opacity:.55;pointer-events:none;z-index:40}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(90,60,20,.28) 100%);z-index:39;pointer-events:none}
+
+/* map */
+#map{position:absolute;left:0;top:0;width:1000px;height:821px;transform-origin:0 0}
+#map > svg{position:absolute;inset:0;width:1000px;height:821px;overflow:visible}
+.mshadow{fill:var(--ink)}
+.mfill{fill:var(--sand)}
+.mline{fill:none;stroke:var(--ink);stroke-width:7;stroke-linejoin:round}
+.city{fill:var(--ink)}
+.stk{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:#fff;border:6px solid var(--ink);
+ box-shadow:9px 9px 0 var(--ink);display:flex;align-items:center;justify-content:center}
+.stk svg{width:96px;height:96px;overflow:visible}
+.stk svg *{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.stk .ring{position:absolute;inset:-26px;border-radius:50%;border:6px solid var(--red)}
+.stk .tag{position:absolute;top:-30px;right:-34px;width:62px;height:62px;border-radius:50%;background:var(--red);color:#fff;
+ border:4px solid var(--ink);font-weight:900;font-size:30px;display:flex;align-items:center;justify-content:center}
+
+/* chrome */
+#top{position:absolute;top:66px;right:70px;left:70px;z-index:30;display:flex;align-items:center;gap:24px}
+#brand{background:var(--paper);border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:4px 22px;font-size:30px;font-weight:900;transform:rotate(-2deg);white-space:nowrap}
+#brand b{color:var(--red)}
+#bar{flex:1;height:22px;border:4px solid var(--ink);background:var(--paper);position:relative;box-shadow:5px 5px 0 var(--ink)}
+#barfill{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(45deg,var(--sand) 0 14px,var(--hl) 14px 28px)}
+
+/* scenes */
+.scene{position:absolute;inset:0;display:none}
+.abs{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.kt{font-weight:900;line-height:1.18;font-size:118px}
+.kt .w{display:inline-block;margin:0 10px}
+.hl{position:relative;display:inline-block;padding:0 18px;z-index:0}
+.hl::before{content:"";position:absolute;right:0;left:0;top:18%;bottom:6%;background:var(--hl);z-index:-1;transform:scaleX(var(--s,0));transform-origin:right center;border-radius:6px}
+.hl.red::before{background:var(--red)}
+.hl.red{color:#fff}
+.sub{font-size:52px;font-weight:900}
+
+.card{text-align:center;position:relative;background:var(--paper);border:5px solid var(--ink);box-shadow:14px 14px 0 var(--ink);padding:40px 46px 46px;width:940px}
+.tape{position:absolute;width:170px;height:52px;background:rgba(245,201,74,.75);border:2px solid rgba(28,28,26,.25);top:-28px}
+.tape.r{right:40px;transform:rotate(6deg)} .tape.l{left:40px;transform:rotate(-7deg)}
+.ttl{font-size:96px;font-weight:900;line-height:1.15}
+.cnt{position:absolute;top:-40px;left:40px;background:var(--ink);color:var(--paper);font-weight:900;font-size:40px;padding:4px 24px;transform:rotate(-4deg)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 20px;margin-top:30px}
+.chip{font-size:46px;font-weight:900;padding:8px 30px;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);background:#fff;border-radius:14px;white-space:nowrap}
+.chip.s{background:var(--sand)} .chip.t{background:var(--teal);color:#fff} .chip.r{background:var(--red);color:#fff} .chip.b{background:var(--blue);color:#fff}
+.note{font-size:40px;font-weight:700;margin-top:30px;line-height:1.5}
+.note b{font-weight:900;color:var(--red)}
+
+.stamp{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;border:7px solid var(--red);color:var(--red);font-weight:900;border-radius:18px;padding:6px 30px;font-size:64px;background:rgba(246,239,220,.85);outline:3px solid var(--red);outline-offset:6px}
+.age{width:330px;background:#fff;border:5px solid var(--ink);box-shadow:9px 9px 0 var(--ink);padding:10px 10px 18px;border-radius:24px}
+.age .n{font-size:130px;font-weight:900;line-height:1.05}
+.age .d{font-size:42px;font-weight:900}
+.age.x .n{color:var(--red)} .age.y .n{color:var(--teal)}
+
+.steps{display:flex;flex-direction:column;gap:16px;margin-top:26px;align-items:stretch}
+.step{display:flex;align-items:center;gap:24px;background:#fff;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:10px 26px;border-radius:14px}
+.step .n{width:66px;height:66px;flex:none;border-radius:50%;background:var(--ink);color:var(--paper);font-size:38px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.step .t{font-size:48px;font-weight:900}
+.step.last{background:var(--sand)} .step.last .n{background:var(--red)}
+
+.tk{position:relative;display:flex;align-items:center;gap:30px;width:900px;background:var(--paper);border:5px solid var(--ink);box-shadow:12px 12px 0 var(--ink);padding:26px 34px;text-align:right}
+.tk .n{width:110px;height:110px;flex:none;border-radius:50%;border:5px solid var(--ink);font-size:62px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.tk .h{font-size:64px;font-weight:900;line-height:1.15}
+.tk .d{font-size:38px;font-weight:700}
+
+.label{position:relative;background:var(--paper);border:6px solid var(--ink);box-shadow:16px 16px 0 var(--ink);padding:20px 70px 30px;text-align:center}
+.label .l1{font-size:64px;font-weight:900;letter-spacing:4px}
+.label .l2{font-family:Kufi,Cairo;font-size:150px;font-weight:700;line-height:1.3;white-space:nowrap}
+.seal{position:absolute;width:190px;height:190px;border-radius:50%;border:8px solid var(--red);background:var(--paper);display:flex;align-items:center;justify-content:center;outline:4px solid var(--red);outline-offset:8px}
+.seal svg{width:120px;height:120px;overflow:visible}
+.seal svg *{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:35;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage">
+<div id="cam">
+  <div id="grid"></div>
+
+  <div id="map">
+    <svg viewBox="0 0 1000 821">
+      <defs><pattern id="hatch" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="18" stroke="#1c1c1a" stroke-opacity=".10" stroke-width="5"/></pattern></defs>
+      <path id="mshadow" class="mshadow" d="%%MAP%%" transform="translate(16 16)"/>
+      <path id="mfill" class="mfill" d="%%MAP%%"/>
+      <path id="mhatch" d="%%MAP%%" fill="url(#hatch)"/>
+      <path id="mline" class="mline" d="%%MAP%%" pathLength="1"/>
+      <g id="cities"></g>
+    </svg>
+    <!-- category stickers (map coords) -->
+    <div class="stk" id="k1" style="left:578px;top:391px"><div class="ring"></div><div class="tag">1</div>
+      <svg viewBox="0 0 100 100"><circle cx="38" cy="60" r="22"/><circle cx="62" cy="60" r="22"/><path d="M38 38 L45 30 L38 20 L31 30 Z"/></svg></div>
+    <div class="stk" id="k2" style="left:226px;top:556px"><div class="ring"></div><div class="tag">2</div>
+      <svg viewBox="0 0 100 100"><rect x="12" y="34" width="76" height="50" rx="9"/><path d="M88 50 H68 a9 9 0 0 0 0 18 H88"/><circle cx="40" cy="18" r="11"/></svg></div>
+    <div class="stk" id="k3" style="left:770px;top:300px"><div class="ring"></div><div class="tag">3</div>
+      <svg viewBox="0 0 100 100"><circle cx="36" cy="24" r="11"/><path d="M18 86 V62 a18 18 0 0 1 36 0 V86"/><circle cx="70" cy="46" r="8"/><path d="M58 86 V74 a12 12 0 0 1 24 0 V86"/></svg></div>
+    <div class="stk" id="k4" style="left:150px;top:230px"><div class="ring"></div><div class="tag">4</div>
+      <svg viewBox="0 0 100 100"><path d="M50 90 V44 M50 64 L24 44 M50 56 L76 38"/><circle cx="50" cy="30" r="12"/><circle cx="20" cy="38" r="9"/><circle cx="80" cy="31" r="9"/></svg></div>
+    <div class="stk" id="k5" style="left:420px;top:690px"><div class="ring"></div><div class="tag">5</div>
+      <svg viewBox="0 0 100 100"><rect x="22" y="12" width="56" height="76" rx="6"/><path d="M34 32 H66 M34 46 H66 M34 60 H54"/></svg></div>
+  </div>
+
+  <!-- S1 hook -->
+  <section class="scene" data-s="0" data-e="3.4">
+    <div class="abs" style="top:250px">
+      <div class="kt"><span class="w" data-a="0.15" data-fx="word">وش</span><span class="w" data-a="0.3" data-fx="word">هي</span></div>
+      <div class="kt"><span class="w" data-a="0.45" data-fx="word">قضايا</span></div>
+      <div class="kt"><span class="hl" data-a="0.6" data-fx="word" data-hl="1.0"><span>الأحوال الشخصية؟</span></span></div>
+    </div>
+    <div class="abs" style="top:1590px"><div class="stamp" data-a="1.6" data-fx="stamp" data-r="-6">بنص دقيقة</div></div>
+  </section>
+
+  <!-- S2 definition -->
+  <section class="scene" data-s="3.4" data-e="7.4">
+    <div class="abs" style="top:250px">
+      <div class="kt" style="font-size:100px"><span class="w" data-a="0.05" data-fx="word">أي</span><span class="w" data-a="0.18" data-fx="word">نزاع</span><span class="w" data-a="0.31" data-fx="word">يصير</span></div>
+      <div class="kt" style="font-size:100px"><span class="hl" data-a="0.45" data-fx="word" data-hl="0.8">داخل الأسرة</span></div>
+    </div>
+    <div class="abs" style="top:1180px">
+      <div class="card" data-a="1.2" data-fx="toss" data-r="-2" style="width:900px">
+        <div class="tape r"></div><div class="tape l"></div>
+        <div class="sub" style="font-size:42px;opacity:.75">ويحكمها</div>
+        <div class="ttl" style="font-size:78px">نظام الأحوال الشخصية</div>
+        <div style="display:flex;justify-content:center;gap:30px;margin-top:22px;align-items:center">
+          <div class="stamp" data-a="1.9" data-fx="stamp" data-r="-8" style="font-size:52px">مرسوم ملكي م/73</div>
+          <div class="chip s" data-a="2.2" data-fx="slap" data-r="4" style="font-size:44px">1443/08/06 هـ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 marriage -->
+  <section class="scene" data-s="7.4" data-e="10.6">
+    <div class="abs" style="top:960px">
+      <div class="card" data-a="0.15" data-fx="toss" data-r="-1.5">
+        <div class="cnt" dir="ltr">01 / 05</div><div class="tape r"></div>
+        <div class="ttl"><span class="hl" data-a="0.5" data-fx="none" data-hl="0.6">الزواج والطلاق</span></div>
+        <div class="chips">
+          <div class="chip" data-a="0.75" data-fx="slap" data-r="-3">إثبات أو نفي الزواج</div>
+          <div class="chip r" data-a="0.9" data-fx="slap" data-r="3">الطلاق</div>
+          <div class="chip s" data-a="1.05" data-fx="slap" data-r="-2">الخلع</div>
+          <div class="chip t" data-a="1.2" data-fx="slap" data-r="2">فسخ النكاح</div>
+          <div class="chip b" data-a="1.35" data-fx="slap" data-r="-4">الرجعة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4 nafaqa -->
+  <section class="scene" data-s="10.6" data-e="13.8">
+    <div class="abs" style="top:960px">
+      <div class="card" data-a="0.15" data-fx="toss" data-r="1.5">
+        <div class="cnt" dir="ltr">02 / 05</div><div class="tape l"></div>
+        <div class="ttl"><span class="hl" data-a="0.5" data-fx="none" data-hl="0.6">النفقة</span></div>
+        <div class="chips">
+          <div class="chip s" data-a="0.75" data-fx="slap" data-r="-3">نفقة الزوجة</div>
+          <div class="chip t" data-a="0.9" data-fx="slap" data-r="2">نفقة الأبناء</div>
+          <div class="chip r" data-a="1.05" data-fx="slap" data-r="-2">نفقة الأقارب</div>
+        </div>
+        <div class="chips">
+          <div class="chip" data-a="1.35" data-fx="slap" data-r="3">مؤقتة</div>
+          <div class="chip" data-a="1.47" data-fx="slap" data-r="-3">مستمرة</div>
+          <div class="chip" data-a="1.59" data-fx="slap" data-r="2">ماضية</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S5 custody -->
+  <section class="scene" data-s="13.8" data-e="17.4">
+    <div class="abs" style="top:960px">
+      <div class="card" data-a="0.15" data-fx="toss" data-r="-1.5">
+        <div class="cnt" dir="ltr">03 / 05</div><div class="tape r"></div>
+        <div class="ttl" style="font-size:88px"><span class="hl" data-a="0.5" data-fx="none" data-hl="0.6">الحضانة والزيارة</span></div>
+        <div class="chips">
+          <div class="chip" data-a="0.75" data-fx="slap" data-r="-3">الرؤية</div>
+          <div class="chip" data-a="0.87" data-fx="slap" data-r="2">الزيارة</div>
+          <div class="chip" data-a="0.99" data-fx="slap" data-r="-2">الاصطحاب</div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:40px;margin-top:34px">
+          <div class="age y" data-a="1.3" data-fx="slap" data-r="-4"><div class="n">15</div><div class="d">المحضون يختار</div></div>
+          <div class="age x" data-a="1.6" data-fx="slap" data-r="4"><div class="n">18</div><div class="d">تنتهي الحضانة</div></div>
+        </div>
+        <div class="note" data-a="2.1" data-fx="up">والأهم دايم: <b>مصلحة المحضون</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 nasab -->
+  <section class="scene" data-s="17.4" data-e="20.6">
+    <div class="abs" style="top:960px">
+      <div class="card" data-a="0.15" data-fx="toss" data-r="1.5">
+        <div class="cnt" dir="ltr">04 / 05</div><div class="tape l"></div>
+        <div class="ttl"><span class="hl" data-a="0.5" data-fx="none" data-hl="0.6">النسب والولاية</span></div>
+        <div class="chips">
+          <div class="chip s" data-a="0.75" data-fx="slap" data-r="-2">إثبات أو نفي النسب</div>
+          <div class="chip r" data-a="0.87" data-fx="slap" data-r="3">العضل</div>
+          <div class="chip" data-a="0.99" data-fx="slap" data-r="-3">الولاية</div>
+          <div class="chip t" data-a="1.11" data-fx="slap" data-r="2">الوصاية</div>
+          <div class="chip" data-a="1.23" data-fx="slap" data-r="-2">القوامة</div>
+          <div class="chip b" data-a="1.35" data-fx="slap" data-r="3">الحجر</div>
+        </div>
+        <div class="note" data-a="1.7" data-fx="up"><b>العضل:</b> منع المرأة من الزواج بكفء بدون مبرر شرعي</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7 inheritance -->
+  <section class="scene" data-s="20.6" data-e="24.2">
+    <div class="abs" style="top:940px">
+      <div class="card" data-a="0.15" data-fx="toss" data-r="-1.5" style="padding-top:30px">
+        <div class="cnt" dir="ltr">05 / 05</div><div class="tape r"></div>
+        <div class="ttl" style="font-size:84px"><span class="hl" data-a="0.5" data-fx="none" data-hl="0.6">المواريث والتركات</span></div>
+        <div class="note" style="margin-top:6px" data-a="0.7" data-fx="up">حصر الورثة وقسمة التركة.. <b>بهالترتيب:</b></div>
+        <div class="steps">
+          <div class="step" data-a="0.95" data-fx="slap" data-r="-1"><div class="n">1</div><div class="t">تجهيز الميت</div></div>
+          <div class="step" data-a="1.2" data-fx="slap" data-r="1"><div class="n">2</div><div class="t">سداد الديون</div></div>
+          <div class="step" data-a="1.45" data-fx="slap" data-r="-1"><div class="n">3</div><div class="t">تنفيذ الوصية</div></div>
+          <div class="step last" data-a="1.7" data-fx="slap" data-r="1"><div class="n">4</div><div class="t">قسمة الباقي على الورثة</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S8 how -->
+  <section class="scene" data-s="24.2" data-e="27.6">
+    <div class="abs" style="top:230px">
+      <div class="kt" style="font-size:72px"><span class="w" data-a="0.05" data-fx="word">طيب..</span></div>
+      <div class="kt" style="font-size:108px"><span class="w" data-a="0.2" data-fx="word">كيف</span><span class="w" data-a="0.32" data-fx="word">ترفع</span><span class="hl red" data-a="0.44" data-fx="word" data-hl="0.7">قضيتك؟</span></div>
+    </div>
+    <div class="abs" style="top:690px;gap:46px">
+      <div class="tk" data-a="0.75" data-fx="toss" data-r="-2"><div class="n" style="background:var(--sand)">1</div><div><div class="h">منصة ناجز</div><div class="d">ارفع دعواك من خدمة «صحيفة دعوى»</div></div></div>
+      <div class="tk" data-a="1.1" data-fx="toss" data-r="1.5"><div class="n" style="background:var(--teal);color:#fff">2</div><div><div class="h">منصة تراضي</div><div class="d">أغلب القضايا تمر على الصلح قبل المحكمة</div></div></div>
+      <div class="tk" data-a="1.45" data-fx="toss" data-r="-1.5"><div class="n" style="background:var(--red);color:#fff">3</div><div><div class="h">البوابة القانونية</div><div class="d">اقرأ النظام ولائحته التنفيذية كاملة</div></div></div>
+    </div>
+  </section>
+
+  <!-- S9 outro -->
+  <section class="scene" data-s="27.6" data-e="30.1" data-noexit="1">
+    <div class="abs" style="top:1080px">
+      <div class="label" data-a="0.35" data-fx="toss" data-r="-2">
+        <div class="tape r" style="top:-30px"></div><div class="tape l" style="top:-30px"></div>
+        <div class="l1" data-a="0.75" data-fx="up">المحامي</div>
+        <div class="l2"><span class="hl" data-a="0.9" data-fx="none" data-hl="0.7">صفوان الحربي</span></div>
+        <div class="seal" data-a="1.35" data-fx="stamp" data-r="-12" style="left:-70px;top:-120px">
+          <svg viewBox="0 0 100 100"><path d="M50 12 V86 M32 86 H68 M16 28 H84 M16 28 L6 56 M16 28 L26 56 M4 56 Q16 72 28 56 Z M84 28 L74 56 M84 28 L94 56 M72 56 Q84 72 96 56 Z"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+  <div id="top"><div id="brand">المحامي <b>صفوان الحربي</b></div><div id="bar"><div id="barfill"></div></div></div>
+  <div id="flash"></div>
+  <div id="vig"></div>
+  <div id="grain"></div>
+</div>
+
+<script>
+const T=30;
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const prog=(t,a,d)=>clamp((t-a)/d);
+const oCub=p=>1-Math.pow(1-p,3), oQuint=p=>1-Math.pow(1-p,5), iCub=p=>p*p*p;
+const ioCub=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const oBack=(p,c1=1.9)=>{const c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)};
+const lerp=(a,b,p)=>a+(b-a)*p;
+
+// cities dots
+const C=[[578,391],[226,556],[738,304],[103,201],[381,726],[245,401]];
+const cg=document.getElementById('cities');
+C.forEach(([x,y])=>{const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',9);c.setAttribute('class','city');cg.appendChild(c)});
+
+const scenes=[...document.querySelectorAll('.scene')].map(el=>({el,s:+el.dataset.s,e:+el.dataset.e,noexit:!!el.dataset.noexit,
+ items:[...el.querySelectorAll('[data-a]')].map(x=>({el:x,a:+x.dataset.a,r:+(x.dataset.r||0),fx:x.dataset.fx,hl:x.dataset.hl?+x.dataset.hl:null,
+   hlEl:x.classList.contains('hl')?x:x.querySelector('.hl')}))}));
+
+// impacts for camera shake
+var impacts=[];
+scenes.forEach(sc=>sc.items.forEach(it=>{
+  if(it.fx==='slap')impacts.push([sc.s+it.a+0.16,4]);
+  if(it.fx==='stamp')impacts.push([sc.s+it.a+0.14,14]);
+  if(it.fx==='toss')impacts.push([sc.s+it.a+0.32,7]);
+}));
+// sticker timing (category scenes start + 0.35)
+const K=[7.75,10.95,14.15,17.75,20.95];
+K.forEach(k=>impacts.push([k+0.18,10]));
+
+// map camera keys: [t, cx, top, width, opacity]
+const MK=[[0,540,720,980,1],[7.1,540,720,980,1],[7.6,540,250,800,1],[23.9,540,250,800,1],[24.5,540,1140,1240,.35],[27.3,540,1140,1240,.35],[27.9,540,330,900,1],[30,540,330,900,1]];
+function mapState(t){
+  for(let i=0;i<MK.length-1;i++){const a=MK[i],b=MK[i+1]; if(t<=b[0]){const p=ioCub(prog(t,a[0],b[0]-a[0]));return a.map((v,j)=>lerp(v,b[j],p)).slice(1);}}
+  return MK[MK.length-1].slice(1);
+}
+
+function fx(it,lt){
+  const s=it.el.style, r=it.r;
+  switch(it.fx){
+    case 'word':{const p=prog(lt,it.a,.42);s.opacity=clamp(p*4);s.transform=`translateY(${(1-oCub(p))*60}px) scale(${p<=0?.4:.4+.6*oBack(p)}) rotate(${(1-p)*-8}deg)`;break}
+    case 'up':{const p=prog(lt,it.a,.45);s.opacity=clamp(p*2.5);s.transform=`translateY(${(1-oQuint(p))*50}px)`;break}
+    case 'slap':{const p=prog(lt,it.a,.32);const q=oBack(p,2.2);s.opacity=clamp(p*5);s.transform=`scale(${p<=0?1.7:lerp(1.7,1,q)}) rotate(${lerp(r+14,r,q)}deg)`;break}
+    case 'stamp':{const p=prog(lt,it.a,.28);const q=oCub(p);s.opacity=clamp(p*3);s.transform=`scale(${lerp(3.2,1,q)}) rotate(${lerp(r-20,r,q)}deg)`;break}
+    case 'toss':{const p=prog(lt,it.a,.6);const q=oBack(p,1.3);s.opacity=clamp(p*4);s.transform=`translateY(${lerp(1300,0,q)}px) rotate(${lerp(r-16,r,q)}deg)`;break}
+  }
+  if(it.hl!==null && it.hlEl){const p=prog(lt,it.hl,.45);it.hlEl.style.setProperty('--s',oQuint(p).toFixed(4))}
+}
+
+function render(t){
+  // camera shake + slow drift
+  let sx=0,sy=0,sr=0;
+  for(const [ti,amp] of impacts){const d=t-ti; if(d>=0&&d<.35){const e=Math.exp(-d*14)*amp; sx+=Math.sin(d*90)*e; sy+=Math.cos(d*77)*e*.8; sr+=Math.sin(d*60)*e*.04}}
+  document.getElementById('cam').style.transform=`translate(${sx}px,${sy}px) rotate(${sr}deg)`;
+  document.getElementById('grid').style.transform=`translate(${(t*14)%120}px,${(t*8)%120}px)`;
+
+  // map
+  const [cx,top,w,op]=mapState(t), sc=w/1000;
+  const m=document.getElementById('map');
+  m.style.transform=`translate(${cx-500*sc}px,${top}px) scale(${sc}) rotate(${Math.sin(t*.5)*.6}deg)`;
+  m.style.opacity=op;
+  const dl=ioCub(prog(t,0.1,1.1)), df=prog(t,.8,.5);
+  document.getElementById('mline').style.strokeDasharray='1';
+  document.getElementById('mline').style.strokeDashoffset=String(1-dl);
+  document.getElementById('mfill').style.opacity=df;document.getElementById('mhatch').style.opacity=df;
+  document.getElementById('mshadow').style.opacity=df;
+  document.getElementById('cities').style.opacity=prog(t,1.2,.4);
+  // stickers
+  K.forEach((k,i)=>{const el=document.getElementById('k'+(i+1));const p=prog(t,k,.3);
+    if(p<=0){el.style.display='none';return} el.style.display='flex';
+    const active = t < (K[i+1]||24.2) || t>=27.6;
+    const q=oBack(p,2.4); const dim = active?1:.78;
+    const base = lerp(2.2,1,q)*(t>=24.2?1:lerp(1,dim,prog(t,(K[i+1]||99),.3)));
+    el.style.transform=`scale(${base}) rotate(${lerp(30,(i%2?-6:6),q)}deg)`;
+    el.style.opacity=clamp(p*4);
+    const ring=el.querySelector('.ring'); const rp=((t-k)%1.2)/1.2;
+    ring.style.opacity=(active&&t<24.2&&t>k)?(1-rp)*.9:0; ring.style.transform=`scale(${1+rp*.5})`;
+  });
+
+  // chrome
+  document.getElementById('barfill').style.width=(clamp(t/T)*100)+'%';
+  const ob=prog(t,27.3,.4);document.getElementById('top').style.opacity=1-ob;
+  document.getElementById('top').style.transform=`translateY(${(1-oBack(prog(t,.2,.5)))*-200}px)`;
+
+  for(const s of scenes){
+    const vis=t>=s.s&&t<s.e; s.el.style.display=vis?'block':'none'; if(!vis)continue;
+    const lt=t-s.s; const ex=s.noexit?0:iCub(prog(t,s.e-.32,.32));
+    s.el.style.transform=ex>0?`translate(${-ex*300}px,${ex*1500}px) rotate(${ex*-14}deg)`:'none';
+    for(const it of s.items)fx(it,lt);
+  }
+  // flash on outro
+  const f=prog(t,27.55,.35); document.getElementById('flash').style.opacity=(f>0&&f<1?Math.sin(f*Math.PI)*.6:0).toFixed(3);
+}
+window.render=render; render(0);
+</script>
+</body>
+</html>
