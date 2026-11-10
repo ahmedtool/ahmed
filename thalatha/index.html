@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>٣</title>
-  <meta name="description" content="٣ — مقالات، إذاعة، برامج، ونشرات بريدية تستحق وقتك.">
+  <meta name="description" content="٣ — كل مقالة عن ثلاثة أشياء: ثلاثة أنواع من الأمل، من السيارات، من الأصدقاء…">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='47' font-size='44' font-weight='700' text-anchor='middle' fill='%23fff' font-family='Tahoma,Arial'%3E٣%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +20,7 @@
   </script>
 </head>
 <body>
+  <div class="read-bar" id="readBar" hidden></div>
   <a class="skip" href="#app">تخطَّ إلى المحتوى</a>
 
   <header class="site-header">
@@ -39,7 +40,6 @@
       <nav class="tabs" aria-label="الأقسام">
         <a href="#/" data-tab="home">الرئيسية</a>
         <a href="#/articles" data-tab="articles">المقالات</a>
-        <a href="#/radio" data-tab="radio">الإذاعة</a>
         <a href="#/programs" data-tab="programs">البرامج</a>
       </nav>
     </div>
@@ -58,7 +58,7 @@
   <dialog class="sheet search-sheet" id="dlg-search" aria-label="بحث">
     <div class="search-bar">
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <input id="searchInput" type="search" placeholder="ابحث في المقالات والحلقات…" autocomplete="off">
+      <input id="searchInput" type="search" placeholder="ابحث في المقالات…" autocomplete="off">
       <button class="btn btn-line" type="button" data-close>إغلاق</button>
     </div>
     <div class="list" id="searchResults"></div>
@@ -68,7 +68,7 @@
   <dialog class="sheet" id="dlg-subscribe" aria-labelledby="subTitle">
     <button class="x" type="button" data-close aria-label="إغلاق">×</button>
     <h2 id="subTitle">اشترك في ٣</h2>
-    <p class="muted">تصلك أفضل مقالاتنا وحلقاتنا في بريدك، مجانًا.</p>
+    <p class="muted">تصلك ثلاثية جديدة في بريدك، مجانًا.</p>
     <form class="form" data-form="subscribe" novalidate>
       <label for="subEmail">البريد الإلكتروني</label>
       <input id="subEmail" name="email" type="email" dir="ltr" placeholder="name@example.com" autocomplete="email">
@@ -89,23 +89,6 @@
       <p class="form-msg" role="status" aria-live="polite"></p>
     </form>
   </dialog>
-
-  <!-- المشغّل -->
-  <div class="player" id="player" hidden>
-    <div class="player-art" id="playerArt"></div>
-    <div class="player-info">
-      <strong id="playerTitle"></strong>
-      <span id="playerShow"></span>
-      <div class="progress" aria-hidden="true"><i id="playerBar"></i></div>
-    </div>
-    <button class="icon-btn" id="playerToggle" type="button" aria-label="إيقاف مؤقت">
-      <svg class="i-pause" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
-      <svg class="i-play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>
-    </button>
-    <button class="icon-btn" id="playerClose" type="button" aria-label="إغلاق المشغّل">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-  </div>
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
