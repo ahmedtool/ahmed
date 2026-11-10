@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>٣ — قصص تستحق وقتك</title>
-  <meta name="description" content="٣ منصة محتوى عربية: بودكاست، مقالات، وأفلام وثائقية تُصنع بتأنٍّ.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23E8452C'/%3E%3Ctext x='32' y='47' font-size='44' font-weight='700' text-anchor='middle' fill='%23fff' font-family='Tahoma,Arial'%3E٣%3C/text%3E%3C/svg%3E">
+  <title>٣</title>
+  <meta name="description" content="٣ — مقالات، إذاعة، برامج، ونشرات بريدية تستحق وقتك.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='47' font-size='44' font-weight='700' text-anchor='middle' fill='%23fff' font-family='Tahoma,Arial'%3E٣%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script>
     (function () {
@@ -20,335 +20,94 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+  <a class="skip" href="#app">تخطَّ إلى المحتوى</a>
 
-  <header class="site-header" id="top">
-    <div class="wrap header-row">
-      <a class="logo" href="#top" aria-label="٣ — الصفحة الرئيسية">
-        <span class="logo-mark">٣</span>
-      </a>
-
-      <nav class="nav" id="nav" aria-label="التنقل الرئيسي">
-        <a href="#podcasts">بودكاست</a>
-        <a href="#articles">مقالات</a>
-        <a href="#films">وثائقيات</a>
-        <a href="#newsletter">النشرات</a>
-        <a href="#about">من نحن</a>
-      </nav>
-
-      <div class="header-actions">
-        <button class="icon-btn" id="themeToggle" type="button" aria-label="تبديل المظهر">
-          <svg class="i-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          <svg class="i-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </button>
-        <a class="btn btn-solid header-cta" href="#newsletter">اشترك</a>
-        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="nav">
-          <span></span><span></span>
-        </button>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="topbar">
+        <a class="logo" href="#/" aria-label="٣ — الرئيسية">
+          <span class="logo-num">٣</span><span class="logo-dot"></span>
+        </a>
+        <div class="top-actions">
+          <button class="icon-btn" type="button" id="searchBtn" aria-label="بحث">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button class="btn btn-dark" type="button" data-open="subscribe"><span class="badge"></span>اشترك</button>
+          <button class="btn btn-line" type="button" data-open="login">الدخول</button>
+        </div>
       </div>
+      <nav class="tabs" aria-label="الأقسام">
+        <a href="#/" data-tab="home">الرئيسية</a>
+        <a href="#/articles" data-tab="articles">المقالات</a>
+        <a href="#/radio" data-tab="radio">الإذاعة</a>
+        <a href="#/programs" data-tab="programs">البرامج</a>
+      </nav>
     </div>
   </header>
 
-  <main id="main">
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="dot"></span> الحلقة الجديدة · بودكاست «ثالث الأثافي»</p>
-          <h1>كيف تصنع المدنُ ذاكرتَها؟</h1>
-          <p class="lede">رحلة صوتية بين أزقّة قديمة وأبراج حديثة، نسأل فيها: من يقرّر ما يبقى من المدينة وما يُنسى؟</p>
-          <div class="hero-cta">
-            <button class="btn btn-solid play-btn" type="button" data-title="كيف تصنع المدنُ ذاكرتَها؟" data-show="ثالث الأثافي">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>
-              استمع الآن
-            </button>
-            <a class="btn btn-ghost" href="#podcasts">كل الحلقات</a>
-          </div>
-          <ul class="hero-meta">
-            <li>٤٨ دقيقة</li>
-            <li>الموسم الثالث</li>
-            <li>الحلقة ١٢</li>
-          </ul>
-        </div>
-
-        <div class="hero-art" aria-hidden="true">
-          <div class="art art-hero">
-            <span class="art-num">٣</span>
-            <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ticker" aria-hidden="true">
-        <div class="ticker-track">
-          <span>بودكاست</span><b>٣</b><span>مقالات</span><b>٣</b><span>وثائقيات</span><b>٣</b><span>نشرات بريدية</span><b>٣</b><span>قصص تستحق وقتك</span><b>٣</b>
-          <span>بودكاست</span><b>٣</b><span>مقالات</span><b>٣</b><span>وثائقيات</span><b>٣</b><span>نشرات بريدية</span><b>٣</b><span>قصص تستحق وقتك</span><b>٣</b>
-        </div>
-      </div>
-    </section>
-
-    <!-- PODCASTS -->
-    <section class="section" id="podcasts">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="kicker">٠١ — استمع</p>
-            <h2>بودكاست</h2>
-          </div>
-          <div class="scroll-ctrl">
-            <button class="icon-btn" type="button" data-scroll="prev" aria-label="السابق">
-              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <button class="icon-btn" type="button" data-scroll="next" aria-label="التالي">
-              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="rail" id="podcastRail" tabindex="0" aria-label="برامج البودكاست">
-        <article class="show">
-          <div class="art c1"><span class="art-title">ثالث<br>الأثافي</span></div>
-          <h3>ثالث الأثافي</h3>
-          <p>حوارات طويلة مع من يصنعون الفرق بهدوء.</p>
-          <button class="chip play-btn" type="button" data-title="كيف تصنع المدنُ ذاكرتَها؟" data-show="ثالث الأثافي">▶ أحدث حلقة</button>
-        </article>
-        <article class="show">
-          <div class="art c2"><span class="art-title">على<br>مهل</span></div>
-          <h3>على مهل</h3>
-          <p>أفكار في الحياة والعمل، تُروى بلا استعجال.</p>
-          <button class="chip play-btn" type="button" data-title="لماذا نخاف من الفراغ؟" data-show="على مهل">▶ أحدث حلقة</button>
-        </article>
-        <article class="show">
-          <div class="art c3"><span class="art-title">رقم<br>صعب</span></div>
-          <h3>رقم صعب</h3>
-          <p>الاقتصاد كما لم يُشرح لك من قبل.</p>
-          <button class="chip play-btn" type="button" data-title="من يدفع ثمن القهوة فعلًا؟" data-show="رقم صعب">▶ أحدث حلقة</button>
-        </article>
-        <article class="show">
-          <div class="art c4"><span class="art-title">حبر<br>وصوت</span></div>
-          <h3>حبر وصوت</h3>
-          <p>كتابٌ كل أسبوع، ونقاشٌ لا يجامل.</p>
-          <button class="chip play-btn" type="button" data-title="روايات لا تُقرأ مرة واحدة" data-show="حبر وصوت">▶ أحدث حلقة</button>
-        </article>
-        <article class="show">
-          <div class="art c5"><span class="art-title">خارج<br>الخريطة</span></div>
-          <h3>خارج الخريطة</h3>
-          <p>قصص سفر إلى أماكن لا تصلها الإعلانات.</p>
-          <button class="chip play-btn" type="button" data-title="قرية على حافة الربع الخالي" data-show="خارج الخريطة">▶ أحدث حلقة</button>
-        </article>
-        <article class="show">
-          <div class="art c6"><span class="art-title">سؤال<br>ثالث</span></div>
-          <h3>سؤال ثالث</h3>
-          <p>علوم وتقنية لمن يحب أن يسأل «ولماذا؟».</p>
-          <button class="chip play-btn" type="button" data-title="هل تحلم الآلة؟" data-show="سؤال ثالث">▶ أحدث حلقة</button>
-        </article>
-      </div>
-    </section>
-
-    <!-- ARTICLES -->
-    <section class="section" id="articles">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="kicker">٠٢ — اقرأ</p>
-            <h2>مقالات</h2>
-          </div>
-          <div class="filters" role="tablist" aria-label="تصنيف المقالات">
-            <button class="filter is-active" type="button" data-filter="all">الكل</button>
-            <button class="filter" type="button" data-filter="culture">ثقافة</button>
-            <button class="filter" type="button" data-filter="economy">اقتصاد</button>
-            <button class="filter" type="button" data-filter="tech">تقنية</button>
-            <button class="filter" type="button" data-filter="society">مجتمع</button>
-          </div>
-        </div>
-
-        <div class="articles" id="articleGrid">
-          <article class="post post-lead" data-cat="culture">
-            <div class="art c2 post-art"><span class="art-num">٣</span></div>
-            <div class="post-body">
-              <span class="tag">ثقافة</span>
-              <h3><a href="#">اللغة التي نحلم بها ليست اللغة التي نكتب بها</a></h3>
-              <p>بين الفصحى والعامية مساحة ثالثة نعيش فيها كل يوم دون أن نسمّيها. محاولة لرسم حدود تلك المساحة.</p>
-              <div class="byline"><span class="avatar">س</span> سارة العتيبي · ١٢ دقيقة قراءة</div>
-            </div>
-          </article>
-
-          <article class="post" data-cat="economy">
-            <span class="tag">اقتصاد</span>
-            <h3><a href="#">لماذا صار الاشتراك الشهري أغلى من الشراء؟</a></h3>
-            <p>اقتصاد الاشتراكات يعيد تعريف الملكية، ومحفظتك تدفع الفرق.</p>
-            <div class="byline"><span class="avatar">خ</span> خالد المطيري · ٧ دقائق</div>
-          </article>
-
-          <article class="post" data-cat="tech">
-            <span class="tag">تقنية</span>
-            <h3><a href="#">الهاتف الذي لا يرنّ: عن عودة الأجهزة البسيطة</a></h3>
-            <p>جيل كامل يبحث عن زرّ إيقاف، ويجده في هاتف بلا تطبيقات.</p>
-            <div class="byline"><span class="avatar">ن</span> نورة الحربي · ٦ دقائق</div>
-          </article>
-
-          <article class="post" data-cat="society">
-            <span class="tag">مجتمع</span>
-            <h3><a href="#">مجلس الجد: كيف خسرنا أول شبكة اجتماعية؟</a></h3>
-            <p>قبل الخوارزميات كان هناك مجلس، وقهوة، وقواعد غير مكتوبة.</p>
-            <div class="byline"><span class="avatar">ف</span> فهد الدوسري · ٩ دقائق</div>
-          </article>
-
-          <article class="post" data-cat="culture">
-            <span class="tag">ثقافة</span>
-            <h3><a href="#">في مديح الملل</a></h3>
-            <p>ماذا لو كان الملل شرطًا للإبداع لا عدوًّا له؟</p>
-            <div class="byline"><span class="avatar">ر</span> ريم القحطاني · ٥ دقائق</div>
-          </article>
-
-          <article class="post" data-cat="tech">
-            <span class="tag">تقنية</span>
-            <h3><a href="#">من يكتب حين تكتب الآلة؟</a></h3>
-            <p>سؤال المؤلف في زمن النماذج اللغوية، وما يبقى للكاتب.</p>
-            <div class="byline"><span class="avatar">ع</span> عمر الشهري · ٨ دقائق</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FILMS -->
-    <section class="section section-dark" id="films">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="kicker">٠٣ — شاهد</p>
-            <h2>وثائقيات</h2>
-          </div>
-          <a class="link-arrow" href="#">كل الأفلام <span aria-hidden="true">←</span></a>
-        </div>
-
-        <div class="films">
-          <a class="film film-lead" href="#">
-            <div class="art f1">
-              <span class="play-ring"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-              <span class="dur">٥٢:١٠</span>
-            </div>
-            <h3>آخر صانعي السفن</h3>
-            <p>على ساحل هادئ، رجل واحد ما زال يبني القوارب الخشبية بيديه.</p>
-          </a>
-          <a class="film" href="#">
-            <div class="art f2">
-              <span class="play-ring"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-              <span class="dur">٣٤:٤٥</span>
-            </div>
-            <h3>ملح</h3>
-            <p>حكاية معدن أبيض غيّر طرق التجارة.</p>
-          </a>
-          <a class="film" href="#">
-            <div class="art f3">
-              <span class="play-ring"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-              <span class="dur">٢٧:٣٠</span>
-            </div>
-            <h3>الطريق إلى السوق</h3>
-            <p>يوم واحد في حياة سوق شعبي عمره مئة عام.</p>
-          </a>
-          <a class="film" href="#">
-            <div class="art f4">
-              <span class="play-ring"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-              <span class="dur">٤١:٠٥</span>
-            </div>
-            <h3>ثلاث نخلات</h3>
-            <p>مزرعة صغيرة تقاوم زحف المدينة.</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- STATS -->
-    <section class="section stats-section" id="about">
-      <div class="wrap about-grid">
-        <div>
-          <p class="kicker">من نحن</p>
-          <h2 class="big-quote">نؤمن أن القصة الجيدة تحتاج ثلاثة أشياء: <em>سؤالًا صادقًا</em>، <em>وقتًا كافيًا</em>، <em>وصوتًا واضحًا</em>.</h2>
-        </div>
-        <ul class="stats">
-          <li><strong data-count="320">٠</strong><span>حلقة بودكاست</span></li>
-          <li><strong data-count="850">٠</strong><span>مقالة منشورة</span></li>
-          <li><strong data-count="42">٠</strong><span>فيلمًا وثائقيًا</span></li>
-          <li><strong data-count="3">٠</strong><span>ملايين مستمع شهريًا</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- NEWSLETTER -->
-    <section class="section" id="newsletter">
-      <div class="wrap">
-        <div class="newsletter">
-          <div class="nl-copy">
-            <p class="kicker">النشرة البريدية</p>
-            <h2>ثلاث قصص، كل ثلاثاء.</h2>
-            <p>نختار لك ثلاثة أشياء تستحق وقتك هذا الأسبوع: شيئًا تسمعه، وشيئًا تقرؤه، وشيئًا تشاهده.</p>
-          </div>
-          <form class="nl-form" id="nlForm" novalidate>
-            <label class="sr-only" for="email">البريد الإلكتروني</label>
-            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="بريدك الإلكتروني" required dir="ltr">
-            <button class="btn btn-dark" type="submit">اشترك مجانًا</button>
-            <p class="nl-msg" id="nlMsg" role="status" aria-live="polite"></p>
-          </form>
-          <span class="nl-num" aria-hidden="true">٣</span>
-        </div>
-      </div>
-    </section>
-  </main>
+  <main id="app" class="wrap" tabindex="-1"></main>
 
   <footer class="site-footer">
-    <div class="wrap footer-grid">
-      <div class="footer-brand">
-        <span class="logo-mark logo-lg">٣</span>
-        <p>قصص تستحق وقتك.</p>
-      </div>
-      <div>
-        <h4>المحتوى</h4>
-        <a href="#podcasts">بودكاست</a>
-        <a href="#articles">مقالات</a>
-        <a href="#films">وثائقيات</a>
-        <a href="#newsletter">النشرات</a>
-      </div>
-      <div>
-        <h4>الشركة</h4>
-        <a href="#about">من نحن</a>
-        <a href="#">انضم إلينا</a>
-        <a href="#">أعلن معنا</a>
-        <a href="#">تواصل</a>
-      </div>
-      <div>
-        <h4>تابعنا</h4>
-        <a href="#">يوتيوب</a>
-        <a href="#">إكس</a>
-        <a href="#">إنستغرام</a>
-        <a href="#">لينكدإن</a>
-      </div>
-    </div>
-    <div class="wrap footer-bottom">
-      <span>© <span id="year">٢٠٢٦</span> ٣. جميع الحقوق محفوظة.</span>
-      <span><a href="#">سياسة الخصوصية</a> · <a href="#">الشروط</a></span>
+    <div class="wrap footer-row">
+      <span>جميع الحقوق محفوظة لـ ٣ © <span id="year"></span></span>
+      <button class="theme-btn" type="button" id="themeToggle">تبديل المظهر</button>
     </div>
   </footer>
 
-  <!-- MINI PLAYER -->
+  <!-- البحث -->
+  <dialog class="sheet search-sheet" id="dlg-search" aria-label="بحث">
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="ابحث في المقالات والحلقات…" autocomplete="off">
+      <button class="btn btn-line" type="button" data-close>إغلاق</button>
+    </div>
+    <div class="list" id="searchResults"></div>
+  </dialog>
+
+  <!-- الاشتراك -->
+  <dialog class="sheet" id="dlg-subscribe" aria-labelledby="subTitle">
+    <button class="x" type="button" data-close aria-label="إغلاق">×</button>
+    <h2 id="subTitle">اشترك في ٣</h2>
+    <p class="muted">تصلك أفضل مقالاتنا وحلقاتنا في بريدك، مجانًا.</p>
+    <form class="form" data-form="subscribe" novalidate>
+      <label for="subEmail">البريد الإلكتروني</label>
+      <input id="subEmail" name="email" type="email" dir="ltr" placeholder="name@example.com" autocomplete="email">
+      <button class="btn btn-dark btn-block" type="submit">اشترك</button>
+      <p class="form-msg" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <!-- الدخول -->
+  <dialog class="sheet" id="dlg-login" aria-labelledby="loginTitle">
+    <button class="x" type="button" data-close aria-label="إغلاق">×</button>
+    <h2 id="loginTitle">الدخول</h2>
+    <p class="muted">نرسل لك رابط دخول إلى بريدك، بلا كلمة مرور.</p>
+    <form class="form" data-form="login" novalidate>
+      <label for="loginEmail">البريد الإلكتروني</label>
+      <input id="loginEmail" name="email" type="email" dir="ltr" placeholder="name@example.com" autocomplete="email">
+      <button class="btn btn-dark btn-block" type="submit">أرسل الرابط</button>
+      <p class="form-msg" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <!-- المشغّل -->
   <div class="player" id="player" hidden>
-    <div class="player-art">٣</div>
+    <div class="player-art" id="playerArt"></div>
     <div class="player-info">
-      <strong id="playerTitle">—</strong>
-      <span id="playerShow">—</span>
+      <strong id="playerTitle"></strong>
+      <span id="playerShow"></span>
       <div class="progress" aria-hidden="true"><i id="playerBar"></i></div>
     </div>
-    <button class="icon-btn player-toggle" id="playerToggle" type="button" aria-label="إيقاف مؤقت">
+    <button class="icon-btn" id="playerToggle" type="button" aria-label="إيقاف مؤقت">
       <svg class="i-pause" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
       <svg class="i-play" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>
     </button>
-    <button class="icon-btn" id="playerClose" type="button" aria-label="إغلاق المشغل">
+    <button class="icon-btn" id="playerClose" type="button" aria-label="إغلاق المشغّل">
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
   </div>
 
+  <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
