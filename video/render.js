@@ -1,15 +1,15 @@
-// Renders promo.html to MP4: node video/render.js [fps]   (needs playwright + ffmpeg)
+// Renders an HTML timeline to MP4: node video/render.js [page.html] [out.mp4]   (needs playwright + ffmpeg)
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const path = require('path');
 
-const FPS = +process.argv[2] || 30, DUR = 29;
-const out = path.join(__dirname, 'mizan-promo.mp4');
+const FPS = 30, DUR = 29, SRC = process.argv[2] || 'promo.html';
+const out = path.join(__dirname, process.argv[3] || 'mizan-promo.mp4');
 
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
-  await page.goto('file://' + path.join(__dirname, 'promo.html') + '#render');
+  await page.goto('file://' + path.join(__dirname, SRC) + '#render');
   await page.evaluate(() => document.fonts.ready);
   const ff = spawn('ffmpeg', ['-y', '-f', 'image2pipe', '-framerate', FPS, '-c:v', 'mjpeg', '-i', '-',
     '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo', '-shortest',
