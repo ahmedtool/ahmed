@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ميزان — فيديو ترويجي</title>
+<style>
+@font-face{font-family:Taj;font-weight:500;src:url(fonts/tajawal-arabic-500-normal.woff2)}
+@font-face{font-family:Taj;font-weight:700;src:url(fonts/tajawal-arabic-700-normal.woff2)}
+@font-face{font-family:Taj;font-weight:900;src:url(fonts/tajawal-arabic-900-normal.woff2)}
+:root{--ac:#17b897;--ac2:#0e6b5a;--ink:#14211d;--dark:#070b0a;--good:#1faa59}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Taj,sans-serif;font-weight:700;color:var(--ink);background:#000}
+.sc{position:absolute;inset:0;opacity:0;overflow:hidden}
+.abs{position:absolute}
+.ctr{position:absolute;left:0;right:0;text-align:center}
+/* S1 */
+#s1{background:#f2f5f4}
+.bub{position:absolute;padding:34px 48px;border-radius:56px;font-size:58px;color:#fff;background:var(--ac2);white-space:nowrap;box-shadow:0 18px 40px rgba(14,107,90,.25)}
+.bub.b{background:#1c7fe0;box-shadow:0 18px 40px rgba(28,127,224,.25)}
+.bub.r{border-bottom-right-radius:10px}.bub.l{border-bottom-left-radius:10px}
+.eye{position:absolute;top:800px;width:190px;height:270px;border-radius:50%;background:#101615}
+.eye i{position:absolute;width:74px;height:74px;border-radius:50%;background:#fff;top:60px;left:70px}
+/* dark text scenes */
+.dk{background:#000;color:#fff}
+.big{font-weight:900;font-size:150px;line-height:1.2}
+/* S4 */
+#ring{position:absolute;left:190px;top:610px;width:700px;height:700px;border-radius:50%;border:3px solid rgba(23,184,151,.35)}
+#ring:before{content:"";position:absolute;inset:60px;border-radius:50%;border:2px dashed rgba(23,184,151,.3)}
+.tick{position:absolute;left:346px;top:-14px;width:6px;height:40px;background:var(--ac);transform-origin:3px 364px;border-radius:3px}
+#arrow{position:absolute;left:400px;top:800px;width:280px;height:320px;filter:drop-shadow(0 0 50px rgba(23,184,151,.6))}
+.fw{position:absolute;font-size:64px;color:#fff;opacity:0}
+#target{top:330px;font-size:84px;font-weight:900;color:#fff}
+#target b{color:var(--ac)}
+/* S5 */
+#s5{background:#eef2f0}
+#cam{position:absolute;inset:0;transform-origin:0 0}
+.hdr{position:absolute;top:110px;left:60px;right:60px}
+.hdr h1{font-size:76px;font-weight:900}
+.srch{margin-top:30px;height:96px;border-radius:28px;background:#fff;border:3px solid #dbe2dd;font-size:38px;color:#87948e;padding:22px 36px;font-weight:500}
+.card{position:absolute;width:460px;height:300px;border-radius:40px;background:#fff;padding:36px;box-shadow:0 10px 30px rgba(20,33,29,.07);border:4px solid transparent}
+.ic{width:92px;height:92px;border-radius:26px;display:grid;place-items:center}
+.ic svg{width:54px;height:54px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:44px;margin-top:26px}
+.card p{font-size:30px;color:#6b7a74;font-weight:500;margin-top:6px}
+.cur{position:absolute;width:90px;height:104px;left:0;top:0;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));z-index:9}
+#inv{position:absolute;left:100px;top:400px;width:880px;height:1060px;border-radius:52px;background:#fff;padding:60px;box-shadow:0 50px 120px rgba(20,33,29,.3)}
+#inv h2{font-size:64px;font-weight:900}
+.mut{color:#6b7a74;font-weight:500}
+.row{display:flex;justify-content:space-between;font-size:42px;padding:26px 0;border-bottom:3px solid #e6ece8}
+.tot{display:flex;justify-content:space-between;font-size:58px;font-weight:900;padding:40px 0}
+.btn{height:130px;border-radius:36px;background:var(--ac2);color:#fff;font-size:52px;display:grid;place-items:center;font-weight:900}
+.toast{position:absolute;left:90px;top:780px;width:900px;border-radius:52px;background:var(--good);color:#fff;padding:54px 56px;display:flex;gap:40px;align-items:center;box-shadow:0 40px 100px rgba(31,170,89,.45)}
+.toast .ck{flex:none;width:140px;height:140px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.toast .ck svg{width:80px;height:80px;fill:none;stroke:var(--good);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.toast h3{font-size:56px;font-weight:900}.toast p{font-size:38px;font-weight:500;opacity:.92;margin-top:8px}
+/* S7 */
+.dk2{background:radial-gradient(ellipse at 50% 40%,#12302a 0%,#070b0a 65%);color:#fff}
+#row3d{position:absolute;left:0;top:820px;width:1080px;height:520px;perspective:1600px}
+.fc{position:absolute;top:40px;width:320px;height:420px;border-radius:40px;background:#141c19;border:3px solid #25312d;padding:36px;box-shadow:0 40px 80px rgba(0,0,0,.6)}
+.fc h3{font-size:42px;margin-top:150px;color:#e3ebe7}
+.fc p{font-size:28px;color:#82a197;font-weight:500}
+/* S8 */
+#phone{position:absolute;left:250px;top:380px;width:580px;height:1180px;border-radius:84px;background:#0c1210;border:10px solid #2b3a35;padding:22px;box-shadow:0 60px 140px rgba(0,0,0,.7),0 0 120px rgba(23,184,151,.18)}
+.scr{position:absolute;inset:22px;border-radius:62px;background:#f2f5f4;padding:60px 36px 36px;overflow:hidden;color:var(--ink)}
+.scr h4{font-size:44px;font-weight:900}
+.kpi{border-radius:28px;background:#fff;padding:26px;margin-top:22px}
+.kpi span{font-size:26px;color:#6b7a74;font-weight:500;display:block}
+.kpi b{font-size:50px;font-weight:900}
+.bars{display:flex;align-items:flex-end;gap:16px;height:260px;margin-top:22px;background:#fff;border-radius:28px;padding:26px}
+.bars i{flex:1;border-radius:10px 10px 4px 4px;background:var(--ac);transform-origin:bottom}
+.chip{position:absolute;padding:26px 40px;border-radius:999px;font-size:42px;background:#fff;color:var(--ink);white-space:nowrap;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.chip b{color:var(--ac2);font-weight:900}
+.jr{display:flex;justify-content:space-between;font-size:30px;padding:20px 0;border-bottom:2px solid #e6ece8}
+.jr small{font-size:22px;padding:4px 14px;border-radius:99px;margin-inline-start:8px}
+.dr small{background:#e3edf9;color:#1d5ca8}.cr small{background:#e0efe9;color:#0e6b5a}
+/* S10 */
+#rep{position:absolute;left:90px;top:500px;width:900px;border-radius:52px;background:#fff;color:var(--ink);padding:60px;box-shadow:0 50px 120px rgba(0,0,0,.6)}
+#rep h2{font-size:60px;font-weight:900}
+#rep .row{font-size:46px}
+#rep .net{margin-top:36px;border-radius:32px;background:#e0efe9;color:var(--ac2);padding:36px 40px;display:flex;justify-content:space-between;font-size:58px;font-weight:900}
+/* S11/12 */
+#s11{background:#f4f7f6}
+#logo{position:absolute;left:350px;top:640px;width:380px;height:380px;border-radius:92px;background:linear-gradient(145deg,#17b897,#0e6b5a);display:grid;place-items:center;box-shadow:0 40px 90px rgba(14,107,90,.4)}
+#logo svg{width:230px;height:230px;fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+#grey{position:absolute;inset:0;background:#dfe5e3}
+.pill{display:inline-block;padding:30px 54px;border-radius:999px;background:var(--ink);color:#fff;font-size:46px}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- S1: questions -->
+<div class="sc" id="s1">
+  <div id="bubs">
+    <div class="bub r" style="right:70px;top:240px">وين فاتورة العميل؟</div>
+    <div class="bub b l" style="left:60px;top:440px">كم ربحنا هالشهر؟</div>
+    <div class="bub r" style="right:110px;top:650px">الميزان ما يتوازن!</div>
+    <div class="bub b l" style="left:90px;top:870px">متى إقرار الضريبة؟</div>
+    <div class="bub r" style="right:60px;top:1080px">مين سجّل هالقيد؟</div>
+    <div class="bub b l" style="left:60px;top:1290px">كم باقي بالمخزون؟</div>
+    <div class="bub r" style="right:150px;top:1500px">والرواتب؟!</div>
+  </div>
+  <div class="eye" id="e1" style="left:320px"><i></i></div>
+  <div class="eye" id="e2" style="left:570px"><i></i></div>
+</div>
+
+<!-- S2/S3 -->
+<div class="sc dk" id="s2"><div class="ctr big" style="top:820px" id="t2">شفنا اللخبطة</div></div>
+<div class="sc dk" id="s3"><div class="ctr big" style="top:820px" id="t3">وقلنا: <span style="color:var(--ac)">كفاية</span></div></div>
+
+<!-- S4: arrow -->
+<div class="sc dk" id="s4">
+  <div id="ring"></div>
+  <div class="fw" style="right:90px;top:520px">فواتير؟</div>
+  <div class="fw" style="left:80px;top:700px">قيود؟</div>
+  <div class="fw" style="right:70px;top:1260px">ضريبة؟</div>
+  <div class="fw" style="left:100px;top:1400px">مخزون؟</div>
+  <div class="fw" style="left:390px;top:1560px">رواتب؟</div>
+  <div class="ctr" id="target">كل حساباتك<br><b>في مكان واحد</b></div>
+  <svg id="arrow" viewBox="0 0 100 114"><path d="M50 0 96 110 50 86Z" fill="#0f8f76"/><path d="M50 0 4 110 50 86Z" fill="#2fe0bd"/></svg>
+</div>
+
+<!-- S5: app -->
+<div class="sc" id="s5">
+  <div id="cam">
+    <div class="hdr"><h1>مركز العمليات</h1><div class="srch">ابحث في أكثر من ٣٠٠ عملية…</div></div>
+    <div id="grid"></div>
+    <svg class="cur" id="cur1" viewBox="0 0 90 104"><path d="M8 4 82 58 48 62 68 98 54 102 36 68 10 90Z" fill="#14211d" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></svg>
+  </div>
+  <div id="inv">
+    <h2>فاتورة مبيعات</h2>
+    <p class="mut" style="font-size:38px;margin:10px 0 30px">رقم ١٠٢٤ · مؤسسة النخبة</p>
+    <div class="row"><span>خدمات استشارية</span><span>٤٬٠٠٠</span></div>
+    <div class="row"><span>ضريبة القيمة المضافة ١٥٪</span><span>٦٠٠</span></div>
+    <div class="tot"><span>الإجمالي</span><span>٤٬٦٠٠ ر.س</span></div>
+    <p class="mut" style="font-size:34px;margin-bottom:60px">القيد المحاسبي يُنشأ تلقائياً</p>
+    <div class="btn" id="btn1">ترحيل الفاتورة</div>
+  </div>
+  <div class="toast" id="toast1"><div class="ck"><svg viewBox="0 0 40 40"><path d="M9 21l8 8 15-17"/></svg></div><div><h3>تم ترحيل الفاتورة بنجاح</h3><p>القيد متوازن · مدين = دائن</p></div></div>
+  <svg class="cur" id="cur2" viewBox="0 0 90 104"><path d="M8 4 82 58 48 62 68 98 54 102 36 68 10 90Z" fill="#14211d" stroke="#fff" stroke-width="5" stroke-linejoin="round"/></svg>
+</div>
+
+<!-- S7: floating row -->
+<div class="sc dk2" id="s7">
+  <div class="ctr" id="t7" style="top:330px"><div style="font-size:240px;font-weight:900;color:var(--ac);line-height:1">+٣٠٠</div><div style="font-size:76px;margin-top:20px">عملية محاسبية جاهزة</div></div>
+  <div id="row3d"><div id="rowin" class="abs" style="inset:0;transform-style:preserve-3d"></div></div>
+</div>
+
+<!-- S8: phone -->
+<div class="sc dk2" id="s8">
+  <div id="cam8" class="abs" style="inset:0;transform-origin:0 0">
+    <div id="phone">
+      <div class="scr" id="scrA">
+        <h4>لوحة التحكم</h4>
+        <div class="kpi"><span>الإيرادات</span><b>٨٤٬٥٠٠ ر.س</b></div>
+        <div class="kpi"><span>صافي الربح</span><b style="color:var(--ac2)">٣٣٬٣٠٠ ر.س</b></div>
+        <div class="bars" id="bars"></div>
+        <div class="kpi"><span>النقدية</span><b>١٢٧٬٩٠٠ ر.س</b></div>
+      </div>
+      <div class="scr" id="scrB">
+        <h4>قيد يومية</h4>
+        <p class="mut" style="font-size:28px;margin:8px 0 26px">رقم ٢٠٤٧ · يُتحقق من توازنه قبل الترحيل</p>
+        <div class="jr dr"><span>الصندوق <small>مدين</small></span><span>٤٬٦٠٠</span></div>
+        <div class="jr cr"><span>المبيعات <small>دائن</small></span><span>٤٬٠٠٠</span></div>
+        <div class="jr cr"><span>ضريبة مستحقة <small>دائن</small></span><span>٦٠٠</span></div>
+        <div class="kpi" style="background:#e0efe9;margin:36px 0"><span>الفرق</span><b style="color:var(--ac2)">٠٫٠٠ — متوازن</b></div>
+        <div class="btn" id="btn2" style="height:110px;font-size:44px">ترحيل القيد</div>
+      </div>
+    </div>
+    <div class="chip" style="left:40px;top:560px"><b>١١٤</b> قالب قيد</div>
+    <div class="chip" style="right:30px;top:780px"><b>١١١</b> حاسبة مالية</div>
+    <div class="chip" style="left:30px;top:1120px">تقارير فورية</div>
+    <div class="chip" style="right:40px;top:1340px">ضريبة وزكاة</div>
+    <svg class="cur" id="cur3" viewBox="0 0 90 104"><path d="M8 4 82 58 48 62 68 98 54 102 36 68 10 90Z" fill="#fff" stroke="#14211d" stroke-width="5" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="toast" id="toast2"><div class="ck"><svg viewBox="0 0 40 40"><path d="M9 21l8 8 15-17"/></svg></div><div><h3>تم ترحيل القيد بنجاح</h3><p>تحدّثت التقارير لحظياً</p></div></div>
+  <div id="rep">
+    <h2>قائمة الدخل</h2>
+    <p class="mut" style="font-size:36px;margin:8px 0 26px">نوفمبر · محسوبة من القيود مباشرة</p>
+    <div class="row rr"><span>الإيرادات</span><span>٨٤٬٥٠٠</span></div>
+    <div class="row rr"><span>المصروفات</span><span>٥١٬٢٠٠</span></div>
+    <div class="net rr"><span>صافي الربح</span><span>٣٣٬٣٠٠ ر.س</span></div>
+  </div>
+</div>
+
+<!-- S11/12: brand -->
+<div class="sc" id="s11">
+  <div id="grey"></div>
+  <div class="ctr big" id="t11" style="top:800px;font-size:190px">نظام ميزان</div>
+  <div id="lg" class="abs" style="inset:0">
+    <div id="logo"><svg viewBox="0 0 100 100"><path d="M50 14v70M30 86h40M16 30h68M50 22l-34 8M50 22l34 8"/><path d="M16 30 5 56a11.5 9 0 0 0 22 0ZM84 30 73 56a11.5 9 0 0 0 22 0Z"/></svg></div>
+    <div class="ctr" id="nm" style="top:1070px;font-size:130px;font-weight:900">ميزان</div>
+  </div>
+  <div class="ctr" id="tag" style="top:1130px;font-size:74px;font-weight:900">محاسبتك… <span style="color:var(--ac2)">موزونة</span></div>
+  <div class="ctr" id="cta" style="top:1300px"><span class="pill">يعمل بالكامل في المتصفح</span></div>
+</div>
+
+</div>
+<script>
+const T=29, OUT='cubic-bezier(.16,1,.3,1)', BACK='cubic-bezier(.34,1.56,.64,1)', IO='cubic-bezier(.65,0,.35,1)', IN='cubic-bezier(.7,0,.84,0)';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], anims=[];
+function kf(el,frames){
+  const k=frames.map(([t,p,e])=>({...p,offset:Math.min(1,Math.max(0,t/T)),easing:e||'linear'}));
+  if(k[0].offset>0)k.unshift({...k[0],offset:0});
+  if(k[k.length-1].offset<1)k.push({...k[k.length-1],offset:1});
+  const a=el.animate(k,{duration:T*1000,fill:'both'});a.pause();anims.push(a);
+}
+const show=(el,a,b,fi=.001,fo=.001)=>kf(el,[[a,{opacity:0}],[a+fi,{opacity:1}],[b-fo,{opacity:1}],[b,{opacity:0}]]);
+const pop=(el,t,d=.45,from=.3)=>{kf(el,[[t,{opacity:0}],[t+d*.4,{opacity:1}]]);kf(el,[[t,{scale:String(from)},BACK],[t+d,{scale:'1'}]]);};
+const rise=(el,t,d=.6,dy=80)=>{kf(el,[[t,{opacity:0}],[t+d*.5,{opacity:1}]]);kf(el,[[t,{translate:`0 ${dy}px`},OUT],[t+d,{translate:'0 0'}]]);};
+const focus=(x,y,s)=>({translate:`${540-x*s}px ${960-y*s}px`,scale:String(s)});
+const P=(x,y)=>({translate:`${x}px ${y}px`});
+
+/* ---- S1 0–2.4 ---- */
+show($('#s1'),0,2.45);
+$$('.bub').forEach((b,i)=>pop(b,.08+i*.19,.4));
+kf($('#bubs'),[[1.5,{filter:'blur(0px)',opacity:1},OUT],[1.9,{filter:'blur(16px)',opacity:.35}]]);
+['#e1','#e2'].forEach(s=>{const e=$(s);
+  kf(e,[[1.55,{opacity:0}],[1.65,{opacity:1}]]);
+  kf(e,[[1.55,{scale:'.2 .2'},BACK],[1.9,{scale:'1 1'}],[2.08,{scale:'1 1'}],[2.14,{scale:'1 .08'}],[2.22,{scale:'1 1'}]]);
+  kf(e.firstElementChild,[[1.7,P(0,0),IO],[1.95,P(-34,20),IO],[2.3,P(30,10)]]);});
+
+/* ---- S2/S3 ---- */
+show($('#s2'),2.4,3.42);kf($('#t2'),[[2.4,{scale:'1.5',filter:'blur(20px)'},OUT],[2.75,{scale:'1',filter:'blur(0px)'}],[3.4,{scale:'1.06'}]]);
+show($('#s3'),3.4,4.45);kf($('#t3'),[[3.4,{scale:'.6'},BACK],[3.7,{scale:'1'}],[4.4,{scale:'1.05'}]]);
+
+/* ---- S4 4.4–7.2 ---- */
+show($('#s4'),4.4,7.25,.15,.25);
+for(let i=0;i<12;i++){const t=document.createElement('i');t.className='tick';t.style.rotate=i*30+'deg';if(i%3)t.style.opacity=.35;$('#ring').append(t);}
+kf($('#ring'),[[4.4,{rotate:'0deg',scale:'.6',opacity:0},OUT],[5,{rotate:'40deg',scale:'1',opacity:1}],[6.3,{rotate:'90deg',scale:'1',opacity:1},IN],[6.8,{rotate:'110deg',scale:'3',opacity:0}]]);
+kf($('#arrow'),[[4.4,{rotate:'-140deg'},IO],[4.85,{rotate:'95deg'},IO],[5.25,{rotate:'-60deg'},IO],[5.6,{rotate:'25deg'},BACK],[5.95,{rotate:'0deg'}]]);
+kf($('#arrow'),[[4.4,{scale:'0'},BACK],[4.75,{scale:'1'}],[6.2,{scale:'1',translate:'0 0'},IN],[7.05,{scale:'16',translate:'0 900px'}]]);
+$$('.fw').forEach((w,i)=>{const t=4.55+i*.2;kf(w,[[t,{opacity:0,scale:'.7'}],[t+.08,{opacity:1,scale:'1'}],[t+.3,{opacity:.9,scale:'1'}],[t+.42,{opacity:0,scale:'1.1'}]]);});
+rise($('#target'),5.7,.6,60);kf($('#target'),[[6.4,{filter:'blur(0px)'}],[6.8,{filter:'blur(14px)'}]]);
+
+/* ---- S5 7.0–13.4 ---- */
+const ops=[['فاتورة مبيعات','ترحيل تلقائي للقيد','#0e6b5a','M9 4h12l5 5v17H9ZM13 13h8M13 18h8M13 23h5'],
+['سند قبض','تحصيل من العملاء','#1c7fe0','M15 5v18M8 16l7 7 7-7M6 27h18'],
+['قيد يومية','قيد مزدوج متوازن','#eb6834','M6 6h8v20H6ZM16 6h8v20h-8ZM9 12h2M19 12h2'],
+['مسير الرواتب','رواتب وتأمينات','#8a56d8','M11 12a4 4 0 1 0 0-.1M4 26c0-6 14-6 14 0M21 9a3.5 3.5 0 1 1 0 7M22 20c3 0 5 2 5 6'],
+['إقرار الضريبة','القيمة المضافة','#d8a013','M8 24 22 6M10 10a2.5 2.5 0 1 0 0-.1M20 22a2.5 2.5 0 1 0 0-.1'],
+['ميزان المراجعة','أرصدة لحظية','#17b897','M15 5v20M9 26h12M5 10h20M5 10l-3 8h6ZM25 10l-3 8h6Z'],
+['المخزون','متوسط تكلفة مرجح','#c8456b','M4 10l11-5 11 5v11l-11 5-11-5ZM4 10l11 5 11-5M15 15v11'],
+['الأصول الثابتة','إهلاك شهري','#3a6f8f','M5 26V10h9v16M14 26V5h11v21M9 15h1M9 20h1M19 10h1M19 15h1M19 20h1M3 26h24']];
+const cards=ops.map(([n,d,c,p],i)=>{const e=document.createElement('div');e.className='card';
+  e.style.left=(i%2?60:560)+'px';e.style.top=(400+Math.floor(i/2)*340)+'px';
+  e.innerHTML=`<div class="ic" style="background:${c}"><svg viewBox="0 0 30 30"><path d="${p}"/></svg></div><h3>${n}</h3><p>${d}</p>`;$('#grid').append(e);return e;});
+show($('#s5'),6.85,13.5,.3,.3);
+cards.forEach((c,i)=>rise(c,7.0+i*.06,.6,140));
+const hov=(c,a,b)=>kf(c,[[a,{borderColor:'transparent',scale:'1'},OUT],[a+.2,{borderColor:'#17b897',scale:'1.05'}],[b,{borderColor:'#17b897',scale:'1.05'},OUT],[b+.2,{borderColor:'transparent',scale:'1'}]]);
+hov(cards[3],9.1,9.9);hov(cards[4],10.1,10.6);hov(cards[0],10.9,11.3);
+kf($('#cam'),[[7.0,{...focus(540,960,1.5),filter:'blur(14px)'},OUT],[7.7,{...focus(540,960,1),filter:'blur(0px)'},IO],[8.1,focus(540,960,1),IO],[8.9,focus(560,640,1.75),IO],[9.6,focus(380,900,1.75),IO],[10.4,focus(700,1200,1.9),IO],[11.0,{...focus(540,960,1),filter:'blur(0px)'},OUT],[11.5,{...focus(540,960,.94),filter:'blur(18px)'}]]);
+kf($('#cur1'),[[7.3,{...P(900,1750),opacity:0},OUT],[7.5,{opacity:1}],[8.3,P(760,560),IO],[9.2,P(250,900),IO],[10.2,P(760,1230),IO],[10.9,{...P(760,560),opacity:1,scale:'1'}],[11.0,{scale:'.75'}],[11.12,{scale:'1',opacity:1}],[11.2,{opacity:0}]]);
+kf($('#inv'),[[11.1,{opacity:0}],[11.25,{opacity:1}],[12.25,{opacity:1,filter:'blur(0px)'},OUT],[12.6,{opacity:.35,filter:'blur(10px)'}]]);
+kf($('#inv'),[[11.1,{scale:'.4',translate:'240px -400px'},OUT],[11.65,{scale:'1',translate:'0 0'}],[12.25,{scale:'1'},OUT],[12.6,{scale:'.9'}]]);
+kf($('#cur2'),[[11.2,{...P(760,560),opacity:0},IO],[11.3,{opacity:1}],[11.95,{...P(520,1340),scale:'1'}],[12.05,{scale:'.75'}],[12.18,{scale:'1',opacity:1}],[12.45,{opacity:0}]]);
+kf($('#btn1'),[[12.0,{scale:'1',background:'#0e6b5a'}],[12.08,{scale:'.94',background:'#0a5446'}],[12.2,{scale:'1',background:'#0e6b5a'}]]);
+pop($('#toast1'),12.25,.5,.5);
+
+/* ---- S7 13.3–15.7 ---- */
+show($('#s7'),13.3,15.75,.3,.3);
+rise($('#t7'),13.7,.6,70);
+ops.slice(0,6).forEach(([n,d,c,p],i)=>{const e=document.createElement('div');e.className='fc';e.style.left=(i*360-540)+'px';
+  e.innerHTML=`<div class="ic abs" style="background:${c}"><svg viewBox="0 0 30 30"><path d="${p}"/></svg></div><h3>${n}</h3><p>${d}</p>`;$('#rowin').append(e);
+  kf(e,[[13.3,{translate:'0 0'},IO],[14.5,{translate:`0 ${i%2?-34:30}px`},IO],[15.7,{translate:'0 0'}]]);
+  e.style.rotate='y '+(-18)+'deg';});
+kf($('#rowin'),[[13.3,{transform:'translate3d(380px,0,900px) rotateY(10deg)',opacity:0},OUT],[13.6,{opacity:1}],[14.3,{transform:'translate3d(140px,0,0) rotateY(10deg)',opacity:1}],[15.7,{transform:'translate3d(-260px,0,-150px) rotateY(10deg)',opacity:1}]]);
+
+/* ---- S8 15.6–22.6 ---- */
+show($('#s8'),15.6,22.7,.3,.35);
+[.45,.62,.5,.78,.66,.92,1].forEach((h,i)=>{const b=document.createElement('i');b.style.height=h*100+'%';if(i<6)b.style.opacity=.45;$('#bars').append(b);
+  kf(b,[[16.1+i*.06,{scale:'1 0'},OUT],[16.7+i*.06,{scale:'1 1'}]]);});
+kf($('#phone'),[[15.6,{translate:'0 1500px',rotate:'8deg'},OUT],[16.5,{translate:'0 0',rotate:'0deg'}]]);
+$$('.chip').forEach((c,i)=>{pop(c,16.5+i*.16,.45);kf(c,[[17.5,{translate:'0 0'},IN],[17.95,{translate:`${i%2?700:-700}px 0`}]]);});
+kf($('#cam8'),[[17.5,focus(540,960,1),IO],[18.1,focus(540,980,1.5)],[19.0,{...focus(540,980,1.5),filter:'blur(0px)',opacity:1},OUT],[19.4,{...focus(540,980,1.4),filter:'blur(14px)',opacity:.4}],[20.4,{opacity:.4},OUT],[20.8,{opacity:0}]]);
+show($('#scrB'),17.6,22.7,.3);kf($('#scrB'),[[17.6,{translate:'-80px 0'},OUT],[18.0,{translate:'0 0'}]]);
+kf($('#cur3'),[[18.1,{...P(760,1500),opacity:0},IO],[18.2,{opacity:1}],[18.75,{...P(540,1290),scale:'1'}],[18.85,{scale:'.75'}],[18.98,{scale:'1',opacity:1}],[19.2,{opacity:0}]]);
+kf($('#btn2'),[[18.8,{scale:'1'}],[18.88,{scale:'.93'}],[19.0,{scale:'1'}]]);
+pop($('#toast2'),19.05,.5,.5);
+kf($('#toast2'),[[20.3,{translate:'0 0',filter:'blur(0px)'},IN],[20.75,{translate:'0 -1300px',filter:'blur(8px)'}]]);
+kf($('#rep'),[[20.5,{opacity:0}],[20.8,{opacity:1}]]);kf($('#rep'),[[20.5,{translate:'0 500px',scale:'.9'},OUT],[21.2,{translate:'0 0',scale:'1'}],[22.6,{scale:'1.04'}]]);
+$$('.rr').forEach((r,i)=>{const t=20.95+i*.22;kf(r,[[t,{opacity:0,translate:'60px 0'},OUT],[t+.45,{opacity:1,translate:'0 0'}]]);});
+
+/* ---- S11/12 22.5–29 ---- */
+show($('#s11'),22.45,29.1,.4);
+kf($('#grey'),[[25.3,{opacity:0},IO],[26,{opacity:1}]]);
+kf($('#t11'),[[22.8,{opacity:0,scale:'.7',filter:'blur(16px)'},OUT],[23.3,{opacity:1,scale:'1',filter:'blur(0px)'}],[23.9,{opacity:1,scale:'1.03',filter:'blur(0px)'},IN],[24.2,{opacity:0,scale:'1.3',filter:'blur(16px)'}]]);
+kf($('#logo'),[[24.1,{opacity:0,scale:'.2',rotate:'-25deg'},BACK],[24.7,{opacity:1,scale:'1',rotate:'0deg'}]]);
+rise($('#nm'),24.5,.5,50);
+kf($('#lg'),[[25.4,{translate:'0 0',scale:'1'},IO],[26.1,{translate:'0 -330px',scale:'.72'}]]);
+rise($('#tag'),26.0,.6,60);
+pop($('#cta'),26.8,.5,.6);
+kf($('#stage'),[[28.6,{filter:'brightness(1)'}],[29,{filter:'brightness(1)'}]]);
+
+window.seek=t=>{anims.forEach(a=>a.currentTime=Math.min(t,T-.001)*1000)};
+seek(0);
+if(location.hash!=='#render'){ // live preview, scaled to fit the window
+  const fit=()=>{const s=Math.min(innerWidth/1080,innerHeight/1920);const st=$('#stage');st.style.transformOrigin='0 0';st.style.transform=`translate(${(innerWidth-1080*s)/2}px,0) scale(${s})`;};
+  fit();onresize=fit;const t0=performance.now();(function loop(n){seek(((n-t0)/1000)%T);requestAnimationFrame(loop)})(t0);
+}
+</script>
+</body>
+</html>
