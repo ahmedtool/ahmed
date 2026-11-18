@@ -123,7 +123,7 @@ img, svg { display: block; }
 .mission-head h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 500; line-height: 1.2; max-width: 720px; }
 .spin-badge { position: relative; width: 120px; height: 120px; flex: none; }
 .spin-badge > svg { width: 100%; height: 100%; animation: spin 14s linear infinite; }
-.spin-badge text { font-size: 9.6px; letter-spacing: 1.6px; fill: var(--text); font-weight: 500; text-transform: uppercase; }
+.spin-badge text { font-size: 9px; letter-spacing: 1.2px; fill: var(--text); font-weight: 500; text-transform: uppercase; }
 .spin-center { position: absolute; inset: 34px; border-radius: 50%; background: var(--terracotta); display: grid; place-items: center; }
 .spin-center svg { width: 30px; fill: none; stroke: var(--cream); stroke-width: 4; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -265,6 +265,9 @@ img, svg { display: block; }
 .socials a { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; transition: background .2s; }
 .socials a:hover { background: var(--terracotta); }
 .socials svg { width: 15px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; color: #fff; }
+
+.credit { position: relative; z-index: 1; font-size: 11px; opacity: .5; padding: 0 0 18px; }
+.credit a { text-decoration: underline; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 980px) {
