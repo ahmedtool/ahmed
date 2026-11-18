@@ -107,6 +107,7 @@
 
   /* ---------- AI photos in cards (one image per language) ---------- */
   const PHOTO_ALT = {
+    expertise: { en: "A smiling young woman with long wavy hair resting her cheek on her hand", ar: "فتاة بحجاب أخضر تبتسم وهي تضع ذراعيها على الطاولة" },
     mission: { en: "A thoughtful young man in a terracotta polo, hand on his chin", ar: "شاب يرتدي الثوب والشماغ يضع يده على ذقنه متأملًا" }
   };
   function setPhotos(l) {
@@ -128,7 +129,6 @@
 
   /* ---------- people in cards ---------- */
   const people = {
-    expertise: svg("0 0 300 300", `<circle cx="150" cy="170" r="110" fill="#fff" opacity=".18"/>${im("expertise", 25, 50, 250)}${sparkle(240, 80, 14, "#fff")}`),
     approach: svg("0 0 300 300", `<circle cx="150" cy="170" r="110" fill="#000" opacity=".1"/>${im("approach", 25, 50, 250)}${sparkle(60, 90, 12, C.mustard)}`),
     ceo: svg("0 0 220 240", im("ceo", 0, 10, 230)),
     cap: svg("0 0 220 240", im("capguy", 0, 20, 220, true))
