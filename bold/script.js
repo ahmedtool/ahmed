@@ -107,6 +107,7 @@
 
   /* ---------- AI photos in cards (one image per language) ---------- */
   const PHOTO_ALT = {
+    footer: { en: "A cheerful young man in a teal sweater gesturing with an open hand", ar: "شاب بالثوب والشماغ يبتسم ويشير بيده المفتوحة" },
     approach: { en: "A relaxed young woman in a teal sweater resting her cheek on her hand", ar: "شاب بالثوب والشماغ يسند خده على يده مبتسمًا" },
     expertise: { en: "A smiling young woman with long wavy hair resting her cheek on her hand", ar: "فتاة بحجاب أخضر تبتسم وهي تضع ذراعيها على الطاولة" },
     mission: { en: "A thoughtful young man in a terracotta polo, hand on his chin", ar: "شاب يرتدي الثوب والشماغ يضع يده على ذقنه متأملًا" }
@@ -151,8 +152,6 @@
   /* ---------- lounge ---------- */
   document.getElementById("lounge").innerHTML = svg("0 0 420 300", `${im("lounge", 140, 0, 300)}${sparkle(380, 60, 14, C.mustard)}`);
 
-  /* ---------- footer person ---------- */
-  document.getElementById("footPerson").innerHTML = svg("0 0 260 190", `${im("footer", 20, 0, 190)}${sparkle(225, 50, 14, C.mustard)}${sparkle(200, 110, 8, "#fff")}`);
 
   /* ---------- testimonials ---------- */
   const avatar = (n, bg) => `<div style="background:${bg}"><img src="img/${n}.svg" alt="" style="width:100%;height:100%;display:block;transform:translateY(8%)"></div>`;
