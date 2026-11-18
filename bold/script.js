@@ -73,6 +73,7 @@
   document.getElementById("langBtn").addEventListener("click", () => {
     applyLang(lang === "ar" ? "en" : "ar");
     renderTesti(current);
+    setHero(lang);
   });
 
   /* ---------- characters (Personas illustration set, recoloured) ---------- */
@@ -83,27 +84,27 @@
   const sparkle = (x, y, r, c) =>
     `<path d="M${x} ${y - r} Q${x} ${y} ${x + r} ${y} Q${x} ${y} ${x} ${y + r} Q${x} ${y} ${x - r} ${y} Q${x} ${y} ${x} ${y - r}Z" fill="${c}"/>`;
 
-  /* ---------- HERO ---------- */
-  const heroArt = document.getElementById("heroArt");
-  heroArt.innerHTML = svg("0 0 600 560", `
-    <circle cx="330" cy="350" r="215" fill="${C.ink2}"/>
-    <path class="ribbon" d="M120 540 C40 450 110 330 220 350 C330 370 300 250 380 200 C460 150 480 70 410 45 C340 20 300 110 360 150 C420 190 530 160 540 80"
-      fill="none" stroke="${C.orange}" stroke-width="26" stroke-linecap="round"/>
-    ${im("hero2", 330, 20, 250, true)}
-    ${im("hero1", 40, 120, 300)}
-    ${im("hero3", 230, 250, 330, true)}
-    ${sparkle(530, 300, 16, C.mustard)} ${sparkle(70, 80, 10, "#fff")}
-    <circle cx="30" cy="300" r="4" fill="#fff"/><circle cx="450" cy="20" r="6" fill="${C.mustard}"/>
-  `);
-  const ribbon = heroArt.querySelector(".ribbon");
-  if (ribbon) {
-    const L = ribbon.getTotalLength();
-    ribbon.style.strokeDasharray = L;
-    ribbon.style.strokeDashoffset = L;
-    ribbon.getBoundingClientRect();
-    ribbon.style.transition = "stroke-dashoffset 2.4s ease";
-    requestAnimationFrame(() => (ribbon.style.strokeDashoffset = 0));
+  /* ---------- HERO (AI illustration, one per language) ---------- */
+  const HERO_ALT = {
+    en: "Three friends relaxing together around an orange infinity ribbon",
+    ar: "ثلاثة أصدقاء يجلسون معًا حول شريط برتقالي على شكل علامة اللانهاية"
+  };
+  function setHero(l) {
+    const art = document.getElementById("heroArt");
+    let img = art.querySelector("img");
+    if (!img) {
+      art.innerHTML = '<img class="hero-img" width="1254" height="1254" fetchpriority="high">';
+      img = art.querySelector("img");
+      img.addEventListener("load", () => img.classList.add("loaded"));
+    }
+    img.classList.remove("loaded");
+    img.src = `img/hero-${l}.webp`;
+    img.alt = HERO_ALT[l];
+    if (img.complete) img.classList.add("loaded");
   }
+  setHero(lang);
+  // preload the other language so switching is instant
+  new Image().src = `img/hero-${lang === "ar" ? "en" : "ar"}.webp`;
 
   /* ---------- people in cards ---------- */
   const people = {
