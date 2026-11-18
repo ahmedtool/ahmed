@@ -7,6 +7,74 @@
     dark: "#1F2B2D", white: "#F6F1EA"
   };
 
+
+  /* ---------- language (Arabic / English) ---------- */
+  const AR = {
+    home: "الرئيسية", types: "أنواع الشخصية", teams: "الفرق", resources: "المصادر", login: "تسجيل الدخول",
+    heroTitle: 'نمكّنك من احتضان شخصيتك <span class="pill-avatars"><i class="pa pa-1"></i><i class="pa pa-2">∞</i></span> الفريدة وإطلاق كامل إمكاناتك',
+    start: "ابدأ الاختبار", stat1: "اختبار أُجري اليوم", stat2: "نسبة الرضا عن النتائج",
+    tag1: "شخصية جريئة", tag2: "اكتشاف الذات", tag3: "النمو الشخصي",
+    missionTitle: "مهمتنا أن نقدّم لكل فرد رؤى قيّمة تساعده على فهم شخصيته",
+    badge: "اعرف المزيد عنّا • اعرف المزيد عنّا • ",
+    about: "من نحن", m1tag: "مهمتنا", m2tag: "خبرتنا", m3tag: "منهجنا",
+    m1h: "مهمتنا تمكين الأفراد من احتضان جرأتهم والعيش بأصالة",
+    m1p: "نؤمن بأن لكل شخص سمات ونقاط قوة فريدة، وحين يحتضنها تقوده إلى النمو الشخصي والرضا والنجاح.",
+    m2h: "بخبرة سنوات طويلة في مجال تطوير الشخصية وتحسين الذات",
+    m2p: "يحمل خبراؤنا شهادات عليا في علم النفس، ولديهم تدريب واسع في الكوتشينج والإرشاد.",
+    m3h: "في Bold نتبع منهجًا شاملًا يساعد الأفراد على احتضان جرأتهم",
+    m3p: "ندرك أن الجرأة تشمل جوانب كثيرة من الحياة، منها طريقة التفكير والتواصل والثقة بالنفس ووضع الأهداف.",
+    quote: "«أهلًا بك في Bold، حيث نؤمن بقدرة تفرّدك على تغيير حياتك حين تحتضنه وتعيش بلا خوف»",
+    cite: "غيا، رئيستك التنفيذية الجريئة",
+    slide1: 'أوصاف الاختبارات: <span class="pill-avatars sm"><i class="pa pa-1"></i><i class="pa pa-2">∞</i></span> اكتشف نمط شخصيتك، واختبار التوافق في العلاقات، واختبار الميول المهنية.',
+    slide2: "تقييم القدرات القيادية: اكتشف كيف تُلهم من حولك وتتخذ قراراتك وتوجّه الآخرين.",
+    slide3: "ملف المخاطرة: افهم مدى ارتياحك مع الغموض والخطوات الجريئة.",
+    readMore: "اقرأ المزيد",
+    traitsTitle: "نؤمن بأن الجرأة تضم مجموعة من الصفات المميزة التي تشكّل الإنسان وتمنحه القوة",
+    traitsP: "هذه السمات لا تقتصر على تعريف واحد، بل تشكّل طيفًا غنيًا من الصفات التي تقود عند احتضانها إلى النمو الشخصي والمرونة والنجاح.",
+    download: "حمّل التطبيق", boldTraits: "سمات الجرأة",
+    t1: "الثقة", t2: "المثابرة", t3: "الحزم", t4: "عقلية النمو", t5: "المخاطرة", t6: "الأصالة",
+    testimonial: "آراء العملاء",
+    ctaTitle: "هل أنت مستعد لاكتشاف جرأتك واحتضان إمكاناتك الحقيقية؟",
+    footTitle: "خُض تقييم شخصية Bold، وتقييم القدرات القيادية، وملف المخاطرة",
+    credit: 'رسومات الشخصيات: <a href="https://personas.draftbit.com/" target="_blank" rel="noopener">Personas by Draftbit</a> (CC BY 4.0) بعد إعادة تلوينها.'
+  };
+  const META = {
+    ar: { title: "Bold — احتضن شخصيتك", desc: "يساعدك Bold على اكتشاف شخصيتك واحتضان تفرّدك وإطلاق كامل إمكاناتك." },
+    en: { title: "Bold — Embrace Your Personality", desc: "Bold helps you discover your personality, embrace your uniqueness and unleash your full potential." }
+  };
+  const EN = {};
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.innerHTML;
+  });
+  const params = new URLSearchParams(location.search);
+  let lang = params.get("lang");
+  if (!lang) { try { lang = localStorage.getItem("bold-lang"); } catch (e) {} }
+  if (lang !== "en" && lang !== "ar") lang = "ar";
+
+  function applyLang(l) {
+    lang = l;
+    const dict = l === "ar" ? AR : EN;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const v = dict[el.dataset.i18n];
+      if (v != null) el.innerHTML = v;
+    });
+    const tp = document.querySelector(".spin-badge textPath");
+    if (tp) { if (l === "ar") { tp.removeAttribute("textLength"); tp.removeAttribute("lengthAdjust"); } else { tp.setAttribute("textLength", "222"); tp.setAttribute("lengthAdjust", "spacing"); } }
+    document.documentElement.lang = l;
+    document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+    document.title = META[l].title;
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.content = META[l].desc;
+    document.getElementById("langLabel").textContent = l === "ar" ? "EN" : "ع";
+    document.getElementById("langBtn").setAttribute("aria-label", l === "ar" ? "Switch to English" : "التبديل إلى العربية");
+    try { localStorage.setItem("bold-lang", l); } catch (e) {}
+  }
+  applyLang(lang);
+  document.getElementById("langBtn").addEventListener("click", () => {
+    applyLang(lang === "ar" ? "en" : "ar");
+    renderTesti(current);
+  });
+
   /* ---------- characters (Personas illustration set, recoloured) ---------- */
   const im = (n, x, y, w, flip = false) =>
     `<image href="img/${n}.svg" x="${x}" y="${y}" width="${w}" height="${w}"${flip ? ` transform="translate(${2 * x + w} 0) scale(-1 1)"` : ""}/>`;
@@ -69,12 +137,12 @@
   /* ---------- testimonials ---------- */
   const avatar = (n, bg) => `<div style="background:${bg}"><img src="img/${n}.svg" alt="" style="width:100%;height:100%;display:block;transform:translateY(8%)"></div>`;
   const testimonials = [
-    { name: "Amber Augustin", role: "Adventurer (ISFP-A)", q: "Bold helped me recognize my strengths and step outside my comfort zone. I'm now living a more fulfilling and adventurous life.", a: "t1", bg: C.cream },
-    { name: "Liam Carter", role: "Commander (ENTJ-A)", q: "The Leadership Potential Assessment showed me how I actually lead. My team noticed the difference within weeks.", a: "t2", bg: C.mustard },
-    { name: "Sofia Reyes", role: "Mediator (INFP-T)", q: "I always felt too quiet. Bold taught me that my calm is a strength, and now I speak up when it matters.", a: "t3", bg: C.terracotta },
-    { name: "Noah Kim", role: "Virtuoso (ISTP-A)", q: "The Risk-Taking Profile pushed me to finally start my own studio. Best decision I've ever made.", a: "t4", bg: C.mustard },
-    { name: "Maya Brooks", role: "Campaigner (ENFP-A)", q: "Understanding my personality type changed how I communicate with friends, family and colleagues.", a: "t5", bg: C.green },
-    { name: "Omar Hassan", role: "Logistician (ISTJ-A)", q: "Clear, honest insights. Bold gave me a practical plan to grow my confidence step by step.", a: "t6", bg: C.terracotta }
+    { name: "Amber Augustin", role: "Adventurer (ISFP-A)", q: "Bold helped me recognize my strengths and step outside my comfort zone. I'm now living a more fulfilling and adventurous life.", a: "t1", ar: { name: "أمبر أوغستين", role: "المغامر (ISFP-A)", q: "ساعدني Bold على اكتشاف نقاط قوتي والخروج من منطقة راحتي، وأعيش الآن حياة أكثر رضا ومغامرة." }, bg: C.cream },
+    { name: "Liam Carter", role: "Commander (ENTJ-A)", q: "The Leadership Potential Assessment showed me how I actually lead. My team noticed the difference within weeks.", a: "t2", ar: { name: "ليام كارتر", role: "القائد (ENTJ-A)", q: "أظهر لي تقييم القدرات القيادية كيف أقود فعلًا، ولاحظ فريقي الفرق خلال أسابيع." }, bg: C.mustard },
+    { name: "Sofia Reyes", role: "Mediator (INFP-T)", q: "I always felt too quiet. Bold taught me that my calm is a strength, and now I speak up when it matters.", a: "t3", ar: { name: "صوفيا رييس", role: "الوسيط (INFP-T)", q: "كنت أظن أنني هادئة أكثر من اللازم، فعلّمني Bold أن هدوئي نقطة قوة، وصرت أتكلم حين يلزم الأمر." }, bg: C.terracotta },
+    { name: "Noah Kim", role: "Virtuoso (ISTP-A)", q: "The Risk-Taking Profile pushed me to finally start my own studio. Best decision I've ever made.", a: "t4", ar: { name: "نوح كيم", role: "الفنان الماهر (ISTP-A)", q: "دفعني ملف المخاطرة لأبدأ أخيرًا الاستوديو الخاص بي، وكان أفضل قرار اتخذته." }, bg: C.mustard },
+    { name: "Maya Brooks", role: "Campaigner (ENFP-A)", q: "Understanding my personality type changed how I communicate with friends, family and colleagues.", a: "t5", ar: { name: "مايا بروكس", role: "الناشط (ENFP-A)", q: "فهمُ نمط شخصيتي غيّر طريقة تواصلي مع أصدقائي وعائلتي وزملائي." }, bg: C.green },
+    { name: "Omar Hassan", role: "Logistician (ISTJ-A)", q: "Clear, honest insights. Bold gave me a practical plan to grow my confidence step by step.", a: "t6", ar: { name: "عمر حسن", role: "اللوجستي (ISTJ-A)", q: "رؤى واضحة وصادقة، وأعطاني Bold خطة عملية لأبني ثقتي خطوة بخطوة." }, bg: C.terracotta }
   ];
   const tq = document.getElementById("testiQuote"), ta = document.getElementById("testiAvatar"),
     tn = document.getElementById("testiName"), tr = document.getElementById("testiRole");
@@ -83,10 +151,10 @@
 
   function renderTesti(i) {
     current = i;
-    const t = testimonials[i];
+    const t = lang === "ar" ? Object.assign({}, testimonials[i], testimonials[i].ar) : testimonials[i];
     [tq, ta].forEach((el) => (el.style.opacity = 0));
     setTimeout(() => {
-      tq.textContent = `"${t.q}"`;
+      tq.textContent = lang === "ar" ? `«${t.q}»` : `"${t.q}"`;
       ta.innerHTML = avatar(t.a, t.bg);
       tn.textContent = t.name;
       tr.textContent = t.role;
@@ -96,7 +164,7 @@
       orbits.forEach((b, k) => {
         b.dataset.i = others[k];
         b.innerHTML = avatar(testimonials[others[k]].a, testimonials[others[k]].bg);
-        b.setAttribute("aria-label", "Show testimonial from " + testimonials[others[k]].name);
+        b.setAttribute("aria-label", (lang === "ar" ? "عرض رأي " + testimonials[others[k]].ar.name : "Show testimonial from " + testimonials[others[k]].name));
       });
     }, 250);
   }

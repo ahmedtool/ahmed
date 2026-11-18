@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
   <meta name="description" content="Bold helps you discover your personality, embrace your uniqueness and unleash your full potential." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath d='M20 10c-4-6-14-6-14 0s10 6 14 0 14-6 14 0-10 6-14 0z' fill='none' stroke='%23D9673F' stroke-width='4'/%3E%3C/svg%3E" />
 </head>
@@ -30,19 +30,20 @@
       <span>Bold</span>
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="#" class="active">Home</a>
-      <a href="#types">Personality Types</a>
-      <a href="#about">Teams</a>
-      <a href="#traits">Resources</a>
+      <a href="#" class="active" data-i18n="home">Home</a>
+      <a href="#types" data-i18n="types">Personality Types</a>
+      <a href="#about" data-i18n="teams">Teams</a>
+      <a href="#traits" data-i18n="resources">Resources</a>
     </nav>
     <div class="nav-actions">
       <button class="icon-btn" aria-label="Search">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="M20 20l-4.2-4.2" /></svg>
       </button>
-      <button class="icon-btn" aria-label="Language">
+      <button class="lang-btn" id="langBtn" aria-label="Switch language">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16" /></svg>
+        <span id="langLabel">EN</span>
       </button>
-      <a href="#" class="btn btn-green btn-sm">Login</a>
+      <a href="#" class="btn btn-green btn-sm" data-i18n="login">Login</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
     </div>
   </header>
@@ -51,19 +52,19 @@
   <section class="container hero-wrap">
     <div class="hero">
       <div class="hero-text reveal">
-        <h1>Where we empower you to embrace your unique <span class="pill-avatars"><i class="pa pa-1"></i><i class="pa pa-2">∞</i></span> personality and unleash your full potential</h1>
+        <h1 data-i18n="heroTitle">Where we empower you to embrace your unique <span class="pill-avatars"><i class="pa pa-1"></i><i class="pa pa-2">∞</i></span> personality and unleash your full potential</h1>
         <div class="hero-meta">
-          <a href="#cta" class="btn btn-yellow">Start Test</a>
-          <div class="stat"><strong data-count="236" data-suffix="+">0</strong><span>Tests taken today</span></div>
-          <div class="stat"><strong data-count="98" data-suffix="%">0</strong><span>Results rated</span></div>
+          <a href="#cta" class="btn btn-yellow" data-i18n="start">Start Test</a>
+          <div class="stat"><strong data-count="236" data-suffix="+">0</strong><span data-i18n="stat1">Tests taken today</span></div>
+          <div class="stat"><strong data-count="98" data-suffix="%">0</strong><span data-i18n="stat2">Results rated</span></div>
         </div>
       </div>
       <div class="hero-art" id="heroArt"></div>
     </div>
     <div class="hero-tags">
-      <span class="tag tag-light">Bold personality</span>
-      <span class="tag tag-light">Self-discovery</span>
-      <span class="tag tag-light">Personal growth</span>
+      <span class="tag tag-light" data-i18n="tag1">Bold personality</span>
+      <span class="tag tag-light" data-i18n="tag2">Self-discovery</span>
+      <span class="tag tag-light" data-i18n="tag3">Personal growth</span>
     </div>
     <span class="dot dot-orange hero-dot"></span>
   </section>
@@ -71,33 +72,33 @@
   <!-- ============ MISSION ============ -->
   <section class="container mission" id="about">
     <div class="mission-head">
-      <h2 class="reveal">Our mission is to provide individuals with valuable insights into their personality</h2>
+      <h2 class="reveal" data-i18n="missionTitle">Our mission is to provide individuals with valuable insights into their personality</h2>
       <a href="#types" class="spin-badge" aria-label="See more about us">
         <svg viewBox="0 0 100 100">
           <defs><path id="circ" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" /></defs>
-          <text><textPath href="#circ" textLength="222" lengthAdjust="spacing">See More • About Us • See More • About Us •</textPath></text>
+          <text><textPath href="#circ" textLength="222" lengthAdjust="spacing" data-i18n="badge">See More • About Us • See More • About Us •</textPath></text>
         </svg>
         <span class="spin-center"><svg viewBox="0 0 40 20"><path d="M20 10c-4-6-14-6-14 0s10 6 14 0 14-6 14 0-10 6-14 0z" /></svg></span>
       </a>
     </div>
     <div class="mission-grid">
-      <span class="tag tag-outline about-tag">About Us</span>
+      <span class="tag tag-outline about-tag" data-i18n="about">About Us</span>
       <article class="m-card reveal">
-        <div class="m-img bg-terracotta" data-person="mission"><span class="tag tag-light tag-on-img">Our Mission</span>
+        <div class="m-img bg-terracotta" data-person="mission"><span class="tag tag-light tag-on-img" data-i18n="m1tag">Our Mission</span>
           <a href="#" class="arrow-btn" aria-label="Read more"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg></a>
         </div>
-        <h3>Our mission is to empower individuals to embrace their boldness and live authentically</h3>
-        <p>We believe that everyone possesses unique traits and strengths that, when embraced, can lead to personal growth, fulfillment, and success.</p>
+        <h3 data-i18n="m1h">Our mission is to empower individuals to embrace their boldness and live authentically</h3>
+        <p data-i18n="m1p">We believe that everyone possesses unique traits and strengths that, when embraced, can lead to personal growth, fulfillment, and success.</p>
       </article>
       <article class="m-card reveal">
-        <div class="m-img bg-mustard" data-person="expertise"><span class="tag tag-light tag-on-img">Our Expertise</span></div>
-        <h3>With years of experience in the field of personality development and self-improvement</h3>
-        <p>Our professionals hold advanced degrees in psychology and have extensive training in coaching and counseling.</p>
+        <div class="m-img bg-mustard" data-person="expertise"><span class="tag tag-light tag-on-img" data-i18n="m2tag">Our Expertise</span></div>
+        <h3 data-i18n="m2h">With years of experience in the field of personality development and self-improvement</h3>
+        <p data-i18n="m2p">Our professionals hold advanced degrees in psychology and have extensive training in coaching and counseling.</p>
       </article>
       <article class="m-card reveal">
-        <div class="m-img bg-green" data-person="approach"><span class="tag tag-light tag-on-img">Our Approach</span></div>
-        <h3>At Bold, we take a holistic approach to help individuals embrace their boldness</h3>
-        <p>We understand that boldness encompasses various aspects of life, including mindset, communication, self-confidence, and goal-setting.</p>
+        <div class="m-img bg-green" data-person="approach"><span class="tag tag-light tag-on-img" data-i18n="m3tag">Our Approach</span></div>
+        <h3 data-i18n="m3h">At Bold, we take a holistic approach to help individuals embrace their boldness</h3>
+        <p data-i18n="m3p">We understand that boldness encompasses various aspects of life, including mindset, communication, self-confidence, and goal-setting.</p>
       </article>
     </div>
   </section>
@@ -110,8 +111,8 @@
       <span class="dot dot-mustard q-dot3 small"></span>
       <div class="q-portrait q-left reveal" data-person="ceo"></div>
       <blockquote class="reveal">
-        <p>“Welcome to Bold, where we believe in the transformative power of embracing your uniqueness and living fearlessly”</p>
-        <cite>Ghea, your bold CEO</cite>
+        <p data-i18n="quote">“Welcome to Bold, where we believe in the transformative power of embracing your uniqueness and living fearlessly”</p>
+        <cite data-i18n="cite">Ghea, your bold CEO</cite>
       </blockquote>
       <div class="q-portrait q-right reveal" data-person="cap"></div>
     </div>
@@ -121,16 +122,16 @@
   <section class="container types" id="types">
     <div class="types-art reveal" id="hifive"></div>
     <div class="types-card reveal">
-      <span class="tag tag-light">Personality Types</span>
+      <span class="tag tag-light" data-i18n="types">Personality Types</span>
       <div class="types-slides">
-        <h3 class="types-slide active">Test Descriptions: <span class="pill-avatars sm"><i class="pa pa-1"></i><i class="pa pa-2">∞</i></span> Discover Your Personality Type, Relationship Compatibility Test, Career Aptitude Test.</h3>
-        <h3 class="types-slide">Leadership Potential Assessment: find out how you inspire, decide and guide the people around you.</h3>
-        <h3 class="types-slide">Risk-Taking Profile: understand how comfortable you are with uncertainty and bold moves.</h3>
+        <h3 class="types-slide active" data-i18n="slide1">Test Descriptions: <span class="pill-avatars sm"><i class="pa pa-1"></i><i class="pa pa-2">∞</i></span> Discover Your Personality Type, Relationship Compatibility Test, Career Aptitude Test.</h3>
+        <h3 class="types-slide" data-i18n="slide2">Leadership Potential Assessment: find out how you inspire, decide and guide the people around you.</h3>
+        <h3 class="types-slide" data-i18n="slide3">Risk-Taking Profile: understand how comfortable you are with uncertainty and bold moves.</h3>
       </div>
       <svg class="types-swirl" viewBox="0 0 120 160"><path d="M110 20 C40 10 20 70 50 110 C70 135 105 130 112 118" /></svg>
       <div class="types-foot">
         <a href="#" class="arrow-btn dark" aria-label="Open"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg></a>
-        <a href="#" class="read-more">Read More</a>
+        <a href="#" class="read-more" data-i18n="readMore">Read More</a>
         <div class="slide-dots" id="slideDots"><button class="on"></button><button></button><button></button></div>
       </div>
     </div>
@@ -139,23 +140,23 @@
   <!-- ============ TRAITS ============ -->
   <section class="container traits" id="traits">
     <div class="traits-text reveal">
-      <h2>We believe that boldness encompasses a range of distinct characteristics that define and empower individuals</h2>
-      <p>These bold traits are not limited to a single definition but form a vibrant spectrum of qualities that, when embraced, can lead to personal growth, resilience, and success.</p>
+      <h2 data-i18n="traitsTitle">We believe that boldness encompasses a range of distinct characteristics that define and empower individuals</h2>
+      <p data-i18n="traitsP">These bold traits are not limited to a single definition but form a vibrant spectrum of qualities that, when embraced, can lead to personal growth, resilience, and success.</p>
       <div class="stores">
         <a href="#"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.1.1 2.3-.6 3-1.5z" fill="currentColor"/></svg> App Store</a>
         <a href="#"><svg viewBox="0 0 24 24"><path d="M4 3l10 9-10 9c-.4-.2-.6-.6-.6-1.1V4.1c0-.5.2-.9.6-1.1z" fill="currentColor" opacity=".9"/><path d="M14 12l3-2.7 3.4 2c.8.4.8 1.2 0 1.6l-3.4 2L14 12z" fill="currentColor" opacity=".6"/><path d="M4 3l13 6.3L14 12 4 3zM4 21l10-9 3 2.7L4 21z" fill="currentColor" opacity=".75"/></svg> Google play</a>
       </div>
-      <a href="#" class="btn btn-green">Download the App</a>
+      <a href="#" class="btn btn-green" data-i18n="download">Download the App</a>
     </div>
     <div class="traits-side">
-      <span class="tag tag-outline">Bold Traits</span>
+      <span class="tag tag-outline" data-i18n="boldTraits">Bold Traits</span>
       <ul class="trait-list">
-        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5 5.6.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.6-.8z"/></svg></i>Confidence</li>
-        <li><i class="ti sq"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/></svg></i>Perseverance</li>
-        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 2l2 4 4.5-1.5L17 9l4 2-4 2 1.5 4.5L14 16l-2 4-2-4-4.5 1.5L7 13l-4-2 4-2-1.5-4.5L10 6z"/></svg></i>Assertiveness</li>
-        <li><i class="ti sq"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 12h6M12 9v6" stroke="#F2E6DC" stroke-width="2"/></svg></i>Growth Mindset</li>
-        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/></svg></i>Risk-Taking</li>
-        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 3.2L18 6l.4 3.8L21 12l-2.6 2.2L18 18l-3.8-.2L12 21l-2.2-3.2L6 18l-.4-3.8L3 12l2.6-2.2L6 6l3.8.2z"/></svg></i>Authenticity</li>
+        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5 5.6.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.6-.8z"/></svg></i><span data-i18n="t1">Confidence</span></li>
+        <li><i class="ti sq"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/></svg></i><span data-i18n="t2">Perseverance</span></li>
+        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 2l2 4 4.5-1.5L17 9l4 2-4 2 1.5 4.5L14 16l-2 4-2-4-4.5 1.5L7 13l-4-2 4-2-1.5-4.5L10 6z"/></svg></i><span data-i18n="t3">Assertiveness</span></li>
+        <li><i class="ti sq"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 12h6M12 9v6" stroke="#F2E6DC" stroke-width="2"/></svg></i><span data-i18n="t4">Growth Mindset</span></li>
+        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/></svg></i><span data-i18n="t5">Risk-Taking</span></li>
+        <li><i class="ti"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 3.2L18 6l.4 3.8L21 12l-2.6 2.2L18 18l-3.8-.2L12 21l-2.2-3.2L6 18l-.4-3.8L3 12l2.6-2.2L6 6l3.8.2z"/></svg></i><span data-i18n="t6">Authenticity</span></li>
       </ul>
       <div class="lounge reveal">
         <div class="lounge-card">
@@ -171,7 +172,7 @@
   <section class="container">
     <div class="testi reveal">
       <div class="rings"><i></i><i></i><i></i></div>
-      <span class="tag tag-light">Testimonial</span>
+      <span class="tag tag-light" data-i18n="testimonial">Testimonial</span>
       <p class="testi-quote" id="testiQuote">"Bold helped me recognize my strengths and step outside my comfort zone. I'm now living a more fulfilling and adventurous life."</p>
       <div class="testi-avatar" id="testiAvatar"></div>
       <h4 id="testiName">Amber Augustin</h4>
@@ -191,9 +192,9 @@
       <span class="dot dot-cream c1 small"></span>
       <span class="dot dot-mustard c2 small"></span>
       <span class="dot dot-cream c3 tiny"></span>
-      <h2>Are you ready to uncover your boldness and embrace your true potential?</h2>
+      <h2 data-i18n="ctaTitle">Are you ready to uncover your boldness and embrace your true potential?</h2>
       <div class="cta-actions">
-        <a href="#" class="cta-link">Start Test</a>
+        <a href="#" class="cta-link" data-i18n="start">Start Test</a>
         <a href="#" class="arrow-btn dark big" aria-label="Start test"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" /></svg></a>
       </div>
     </div>
@@ -203,15 +204,15 @@
   <footer class="footer">
     <div class="container footer-in">
       <div class="f-left">
-        <h3>Take our Bold Personality Assessment, Leadership Potential Assessment, and Risk-Taking Profile</h3>
+        <h3 data-i18n="footTitle">Take our Bold Personality Assessment, Leadership Potential Assessment, and Risk-Taking Profile</h3>
         <div class="f-person" id="footPerson"></div>
       </div>
       <div class="f-right">
         <ul class="f-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#types">Personality Types</a></li>
-          <li><a href="#about">Teams</a></li>
-          <li><a href="#traits">Resources</a></li>
+          <li><a href="#" data-i18n="home">Home</a></li>
+          <li><a href="#types" data-i18n="types">Personality Types</a></li>
+          <li><a href="#about" data-i18n="teams">Teams</a></li>
+          <li><a href="#traits" data-i18n="resources">Resources</a></li>
         </ul>
         <span class="f-year">2023©</span>
         <a href="#" class="logo logo-light"><svg viewBox="0 0 40 20" class="logo-mark"><path d="M20 10c-4-6-14-6-14 0s10 6 14 0 14-6 14 0-10 6-14 0z" /></svg><span>Bold</span></a>
@@ -222,7 +223,7 @@
         </div>
       </div>
     </div>
-    <p class="credit container">Character illustrations: <a href="https://personas.draftbit.com/" target="_blank" rel="noopener">Personas by Draftbit</a> (CC BY 4.0), recoloured.</p>
+    <p class="credit container" data-i18n="credit">Character illustrations: <a href="https://personas.draftbit.com/" target="_blank" rel="noopener">Personas by Draftbit</a> (CC BY 4.0), recoloured.</p>
   </footer>
 
   <script src="script.js"></script>
