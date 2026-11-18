@@ -74,6 +74,7 @@
     applyLang(lang === "ar" ? "en" : "ar");
     renderTesti(current);
     setHero(lang);
+    setPhotos(lang);
   });
 
   /* ---------- characters (Personas illustration set, recoloured) ---------- */
@@ -103,12 +104,30 @@
     if (img.complete) img.classList.add("loaded");
   }
   setHero(lang);
+
+  /* ---------- AI photos in cards (one image per language) ---------- */
+  const PHOTO_ALT = {
+    mission: { en: "A thoughtful young man in a terracotta polo, hand on his chin", ar: "شاب يرتدي الثوب والشماغ يضع يده على ذقنه متأملًا" }
+  };
+  function setPhotos(l) {
+    document.querySelectorAll("[data-photo]").forEach((el) => {
+      const key = el.dataset.photo;
+      let img = el.querySelector("img.card-photo");
+      if (!img) {
+        el.insertAdjacentHTML("afterbegin", '<img class="card-photo" loading="lazy" decoding="async">');
+        img = el.querySelector("img.card-photo");
+      }
+      img.src = `img/${key}-${l}.webp`;
+      img.alt = (PHOTO_ALT[key] || {})[l] || "";
+      new Image().src = `img/${key}-${l === "ar" ? "en" : "ar"}.webp`;
+    });
+  }
+  setPhotos(lang);
   // preload the other language so switching is instant
   new Image().src = `img/hero-${lang === "ar" ? "en" : "ar"}.webp`;
 
   /* ---------- people in cards ---------- */
   const people = {
-    mission: svg("0 0 300 300", `<circle cx="150" cy="170" r="110" fill="#000" opacity=".07"/>${im("mission", 25, 50, 250)}`),
     expertise: svg("0 0 300 300", `<circle cx="150" cy="170" r="110" fill="#fff" opacity=".18"/>${im("expertise", 25, 50, 250)}${sparkle(240, 80, 14, "#fff")}`),
     approach: svg("0 0 300 300", `<circle cx="150" cy="170" r="110" fill="#000" opacity=".1"/>${im("approach", 25, 50, 250)}${sparkle(60, 90, 12, C.mustard)}`),
     ceo: svg("0 0 220 240", im("ceo", 0, 10, 230)),

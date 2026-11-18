@@ -142,6 +142,9 @@ img, svg { display: block; }
 .tag-on-img { position: absolute; top: 18px; left: 18px; z-index: 2; }
 .m-img .arrow-btn { position: absolute; left: 20px; bottom: 20px; z-index: 2; }
 .bg-terracotta { background: var(--terracotta); }
+.photo-card.bg-terracotta { background: #CF5029; }
+.card-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 4%; transition: transform .6s ease; }
+.m-card:hover .card-photo { transform: scale(1.04); }
 .bg-mustard { background: var(--mustard); }
 .bg-green { background: var(--green); }
 .m-card h3 { font-size: 20px; font-weight: 400; line-height: 1.3; margin: 22px 0 18px; }
