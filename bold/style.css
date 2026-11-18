@@ -144,6 +144,7 @@ img, svg { display: block; }
 .bg-terracotta { background: var(--terracotta); }
 .photo-card.bg-terracotta { background: #CF5029; }
 .photo-card.bg-mustard { background: #EFA324; }
+.photo-card.bg-green { background: #4F6B38; }
 .card-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 4%; transition: transform .6s ease; }
 .m-card:hover .card-photo { transform: scale(1.04); }
 .bg-mustard { background: var(--mustard); }
